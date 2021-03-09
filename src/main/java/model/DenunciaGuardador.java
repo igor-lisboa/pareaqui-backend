@@ -4,10 +4,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 
 @Entity
-public class DenunciaGuardador {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class DenunciaGuardador extends Denuncia {
     @Id
     @GeneratedValue
     private Long id;
