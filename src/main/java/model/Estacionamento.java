@@ -17,5 +17,5 @@ public class Estacionamento {
     @OneToOne(mappedBy = "id", cascade = CascadeType.ALL)
     private Estacionamento estacionamento;
     @OneToOne(mappedBy = "id", cascade = CascadeType.ALL)
-    private UsuarioDono dono;
+    private UsuarioEstacionamentoDono dono;
 }
