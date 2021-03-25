@@ -1,4 +1,4 @@
-package model;
+package com.uff.pareaqui.entity;
 
 import java.time.format.DateTimeFormatter;
 

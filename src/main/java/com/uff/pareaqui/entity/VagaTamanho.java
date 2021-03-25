@@ -1,4 +1,4 @@
-package model;
+package com.uff.pareaqui.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,10 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class VagaDenunciaFlanelinha {
+public class VagaTamanho {
     @Id
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
-    private Vaga vaga;
+    private String tamanho;
 }

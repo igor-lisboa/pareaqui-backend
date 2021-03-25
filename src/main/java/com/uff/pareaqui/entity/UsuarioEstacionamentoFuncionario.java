@@ -1,4 +1,4 @@
-package model;
+package com.uff.pareaqui.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +9,12 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class UsuarioFiscalRua extends Usuario {
+public class UsuarioEstacionamentoFuncionario extends Usuario {
     @Id
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
     private Usuario usuario;
     @Column(nullable = false)
-    private Endereco endereco;
+    private Estacionamento estacionamento;
 }

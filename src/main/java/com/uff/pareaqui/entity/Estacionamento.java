@@ -1,4 +1,4 @@
-package model;
+package com.uff.pareaqui.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
