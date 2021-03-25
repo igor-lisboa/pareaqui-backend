@@ -4,7 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +20,8 @@ public class Estacionamento {
     private Long id;
     @Column(nullable = false)
     private String nome;
-    @OneToOne
-    private Estacionamento estacionamento;
-    @OneToOne
-    private UsuarioEstacionamentoDono dono;
+    @ManyToOne
+    private Usuario dono;
+    @ManyToOne
+    private Endereco endereco;
 }

@@ -3,7 +3,7 @@ package com.uff.pareaqui.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,8 +17,8 @@ public class UsuarioEstacionamentoFuncionario {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
+    @ManyToOne
     private Usuario usuario;
-    @OneToOne
+    @ManyToOne
     private Estacionamento estacionamento;
 }
