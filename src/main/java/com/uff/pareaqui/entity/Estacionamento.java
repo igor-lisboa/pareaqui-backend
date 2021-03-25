@@ -1,12 +1,17 @@
 package com.uff.pareaqui.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Estacionamento {
     @Id
@@ -14,8 +19,8 @@ public class Estacionamento {
     private Long id;
     @Column(nullable = false)
     private String nome;
-    @OneToOne(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToOne
     private Estacionamento estacionamento;
-    @OneToOne(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToOne
     private UsuarioEstacionamentoDono dono;
 }

@@ -4,7 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Vaga {
     @Id
@@ -12,11 +20,11 @@ public class Vaga {
     private Long id;
     @Column(nullable = false)
     private Float preco;
-    @Column(nullable = false)
+    @OneToOne
     private Estacionamento estacionamento;
-    @Column(nullable = false)
+    @OneToOne
     private VagaTipo tipo;
-    @Column(nullable = false)
+    @OneToOne
     private VagaTamanho tamanho;
     @Column(nullable = true)
     private String identificacao;

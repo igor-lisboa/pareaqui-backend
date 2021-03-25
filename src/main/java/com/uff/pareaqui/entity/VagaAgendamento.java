@@ -1,21 +1,25 @@
 package com.uff.pareaqui.entity;
 
-import java.time.format.DateTimeFormatter;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class VagaAgendamento {
     @Id
     @GeneratedValue
     private Long id;
-    @Column(nullable = false)
+    @OneToOne
     private Vaga vaga;
     @Temporal(TemporalType.TIMESTAMP)
-    private DateTimeFormatter momento;
+    private java.util.Date momento;
 }
