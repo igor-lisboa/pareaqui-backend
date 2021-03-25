@@ -12,11 +12,18 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pareaqui</name>
 	<description>Demo project for Spring Boot</description>
+	<packaging>war</packaging>
 	<properties>
 		<java.version>8</java.version>
-		<jakartaee>8.0</jakartaee>
+
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+		<jakartaee>8.0</jakartaee>
+
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -125,6 +132,30 @@
 									<groupId>javax</groupId>
 									<artifactId>javaee-api</artifactId>
 									<version>${jakartaee}</version>
+									<type>jar</type>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.github.jsimone</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>9.0.27.1</version>
+									<destFileName>webapp-runner.jar</destFileName>
 									<type>jar</type>
 								</artifactItem>
 							</artifactItems>

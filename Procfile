@@ -1,1 +1,1 @@
-web: java -jar target/endorsed/webapp-runner.jar --port $PORT target/pareaqui-1.0-SNAPSHOT.war
+web: java -jar target/endorsed/webapp-runner.jar --port $PORT target/pareaqui-0.0.1-SNAPSHOT.war
