@@ -3,7 +3,8 @@ package com.uff.pareaqui.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,10 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class VagaDenunciaFlanelinha {
+@Table(name = "usuario_rua_fiscais")
+public class UsuarioRuaFiscal {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
-    private Vaga vaga;
+    @ManyToOne
+    private Usuario usuario;
+    @ManyToOne
+    private Endereco endereco;
 }
