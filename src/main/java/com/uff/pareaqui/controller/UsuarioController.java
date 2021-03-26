@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService service;
 
-    @PostMapping("/")
+    @PostMapping
     public Usuario addUsuario(@RequestBody Usuario usuario) {
         return service.saveUsuario(usuario);
     }
@@ -32,7 +32,7 @@ public class UsuarioController {
         return service.saveUsuarios(usuarios);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Usuario> findAllUsuarios() {
         return service.getUsuarios();
     }
@@ -42,7 +42,7 @@ public class UsuarioController {
         return service.getUsuarioById(id);
     }
 
-    @PutMapping("/")
+    @PutMapping
     public Usuario updateUsuario(@RequestBody Usuario usuario) {
         return service.updateUsuario(usuario);
     }
