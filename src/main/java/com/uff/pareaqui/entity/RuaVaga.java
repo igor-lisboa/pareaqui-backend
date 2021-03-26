@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "rua_vagas")
+@Table(name="rua_vagas")
 public class RuaVaga {
     @Id
     @GeneratedValue
