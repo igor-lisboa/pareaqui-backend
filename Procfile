@@ -1,1 +1,0 @@
-web: java $JAVA_OPTS --port $PORT -jar target/pareaqui-0.0.1-SNAPSHOT.jar
