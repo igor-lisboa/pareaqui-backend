@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +15,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="usuarios")
+@Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
 public class Usuario {
+
+    public Usuario(String email, String nome, String senha) {
+        this.setEmail(email);
+        this.setNome(nome);
+        this.setSenha(senha);
+    }
+
+    public Usuario() {
+    }
+
     @Id
     @GeneratedValue
     private Long id;
@@ -40,10 +51,6 @@ public class Usuario {
 
     public String getSenha() {
         return senha;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setEmail(String email) {

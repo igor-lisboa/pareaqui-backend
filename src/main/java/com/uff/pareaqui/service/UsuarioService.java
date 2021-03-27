@@ -6,6 +6,7 @@ import com.uff.pareaqui.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -15,6 +16,14 @@ public class UsuarioService {
 
     public Usuario saveUsuario(Usuario usuario) {
         return repository.save(usuario);
+    }
+
+    public Usuario login(String email, String senha) {
+        Collection<Usuario> usuarios = repository.findByEmailAndSenha(email, senha);
+        if (usuarios.size() == 1) {
+            return (Usuario) usuarios.toArray()[0];
+        }
+        return null;
     }
 
     public List<Usuario> saveUsuarios(List<Usuario> usuarios) {
@@ -29,14 +38,13 @@ public class UsuarioService {
         return repository.findById(id).orElse(null);
     }
 
-    public Long deleteUsuario(Long id) {
+    public void deleteUsuario(Long id) {
         repository.deleteById(id);
-        return id;
     }
 
     public Usuario updateUsuario(Usuario usuario) {
-        repository.deleteById(usuario.getId());
-        return repository.save(usuario);
+        this.deleteUsuario(usuario.getId());
+        return this.saveUsuario(usuario);
     }
 
 }
