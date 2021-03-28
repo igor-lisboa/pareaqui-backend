@@ -168,117 +168,6 @@
 			]
 		},
 		{
-			"name": "Endereço",
-			"item": [
-				{
-					"name": "Adiciona",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"rua\": \"mario viana\",\r\n    \"numero\": \"501\",\r\n    \"complemento\": \"1402\",\r\n    \"bairro\": \"santa rosa\",\r\n    \"cidade\": \"niteroi\",\r\n    \"estado\": \"RJ\",\r\n    \"pais\": \"brasil\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{APP_URL_PAREAQUI}}/endereco",
-							"host": [
-								"{{APP_URL_PAREAQUI}}"
-							],
-							"path": [
-								"endereco"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Todos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{APP_URL_PAREAQUI}}/endereco",
-							"host": [
-								"{{APP_URL_PAREAQUI}}"
-							],
-							"path": [
-								"endereco"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Encontra",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{APP_URL_PAREAQUI}}/endereco/{{endereco_id}}",
-							"host": [
-								"{{APP_URL_PAREAQUI}}"
-							],
-							"path": [
-								"endereco",
-								"{{endereco_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Deleta",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{APP_URL_PAREAQUI}}/endereco/{{endereco_id}}",
-							"host": [
-								"{{APP_URL_PAREAQUI}}"
-							],
-							"path": [
-								"endereco",
-								"{{endereco_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Atualiza",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"rua\": \"mario viana\",\r\n    \"numero\": \"3333\",\r\n    \"complemento\": \"55555\",\r\n    \"bairro\": \"santa rosa\",\r\n    \"cidade\": \"niteroi\",\r\n    \"estado\": \"RJ\",\r\n    \"pais\": \"brasil\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{APP_URL_PAREAQUI}}/endereco/{{endereco_id}}",
-							"host": [
-								"{{APP_URL_PAREAQUI}}"
-							],
-							"path": [
-								"endereco",
-								"{{endereco_id}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "Estacionamento",
 			"item": [
 				{
@@ -288,7 +177,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"dono_id\": \"17\",\r\n    \"endereco_id\": \"24\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"dono_id\": \"{{usuario_id}}\",\r\n    \"rua\": \"Mario rua\",\r\n    \"numero\": \"213\",\r\n    \"complemento\": null,\r\n    \"bairro\": \"santa\",\r\n    \"cidade\": \"nit\",\r\n    \"estado\": \"rj\",\r\n    \"pais\": \"br\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -367,7 +256,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"dono_id\": \"17\",\r\n    \"endereco_id\": \"24\"\r\n}",
+							"raw": "{\r\n    \"nome\": \"te2222ste\",\r\n    \"dono_id\": \"{{usuario_id}}\",\r\n    \"rua\": \"Mario rua\",\r\n    \"numero\": \"213\",\r\n    \"complemento\": \"12\",\r\n    \"bairro\": \"santa\",\r\n    \"cidade\": \"nit\",\r\n    \"estado\": \"rj\",\r\n    \"pais\": \"br\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

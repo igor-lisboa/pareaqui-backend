@@ -23,8 +23,6 @@ public class Vaga {
     @Column(nullable = false)
     private Float preco;
     @ManyToOne
-    private Estacionamento estacionamento;
-    @ManyToOne
     private VagaTipo tipo;
     @ManyToOne
     private VagaTamanho tamanho;
