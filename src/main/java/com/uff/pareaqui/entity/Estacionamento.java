@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="estacionamentos")
+@Table(name = "estacionamentos")
 public class Estacionamento {
     @Id
     @GeneratedValue
@@ -26,4 +26,36 @@ public class Estacionamento {
     private Usuario dono;
     @ManyToOne
     private Endereco endereco;
+
+    public Usuario getDono() {
+        return dono;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setDono(Usuario dono) {
+        this.dono = dono;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

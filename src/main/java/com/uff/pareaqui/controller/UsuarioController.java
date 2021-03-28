@@ -66,36 +66,14 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Map<String, Object> addUsuario(@RequestBody Map<String, ?> input) {
-        Usuario usuario = new Usuario();
-        usuario.setEmail(input.get("email").toString());
-        usuario.setNome(input.get("nome").toString());
-        usuario.setSenha(input.get("senha").toString());
-
+    public Map<String, Object> addUsuario(@RequestBody Usuario usuario) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
             usuario = service.saveUsuario(usuario);
 
             ret.put("success", true);
-            ret.put("message", "Usuário " + usuario.getNome() + " cadastrado com sucesso.");
+            ret.put("message", "O usuário " + usuario.getNome() + " foi cadastrado com sucesso.");
             ret.put("data", usuario);
-        } catch (Exception exception) {
-            ret.put("success", false);
-            ret.put("data", null);
-            ret.put("message", exception.getMessage());
-        }
-        return ret;
-    }
-
-    @PostMapping("/multiplo")
-    public Map<String, Object> addUsuarios(@RequestBody List<Usuario> usuarios) {
-        Map<String, Object> ret = new HashMap<String, Object>();
-        try {
-            List<Usuario> usuariosGerados = service.saveUsuarios(usuarios);
-
-            ret.put("success", true);
-            ret.put("message", "Usuários gravados com sucesso.");
-            ret.put("data", usuariosGerados);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
@@ -140,17 +118,12 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    public Map<String, Object> updateUsuario(@PathVariable Long id, @RequestBody Map<String, ?> input) {
+    public Map<String, Object> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            Usuario usuario = new Usuario();
-            usuario.setEmail(input.get("email").toString());
-            usuario.setNome(input.get("nome").toString());
-            usuario.setSenha(input.get("senha").toString());
-
-            service.updateUsuario(usuario);
+            usuario = service.updateUsuario(id, usuario);
             ret.put("success", true);
-            ret.put("message", usuario.getNome() + " recuperado com sucesso.");
+            ret.put("message", usuario.getNome() + " atualizado com sucesso.");
             ret.put("data", usuario);
         } catch (Exception exception) {
             ret.put("success", false);

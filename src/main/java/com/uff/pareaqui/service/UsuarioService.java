@@ -34,10 +34,6 @@ public class UsuarioService {
         return null;
     }
 
-    public List<Usuario> saveUsuarios(List<Usuario> usuarios) {
-        return repository.saveAll(usuarios);
-    }
-
     public List<Usuario> getUsuarios() {
         return repository.findAll();
     }
@@ -50,9 +46,11 @@ public class UsuarioService {
         repository.deleteById(id);
     }
 
-    public Usuario updateUsuario(Usuario usuario) {
-        this.deleteUsuario(usuario.getId());
-        return this.saveUsuario(usuario);
+    public Usuario updateUsuario(Long id, Usuario usuario) {
+        Usuario usuarioAtualiza = repository.getOne(id);
+        usuarioAtualiza.setNome(usuario.getNome());
+        usuarioAtualiza.setSenha(usuario.getSenha());
+        usuarioAtualiza.setEmail(usuario.getEmail());
+        return this.saveUsuario(usuarioAtualiza);
     }
-
 }

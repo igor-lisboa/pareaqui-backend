@@ -35,33 +35,6 @@
 					"response": []
 				},
 				{
-					"name": "Adiciona Múltiplos",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n    {\r\n        \"email\": \"teste@uhu.com\",\r\n        \"nome\": \"joaozinho\",\r\n        \"senha\": \"Senh@123\"\r\n    },\r\n    {\r\n        \"email\": \"teste@uhu.com\",\r\n        \"nome\": \"joaozinho\",\r\n        \"senha\": \"Senh@123\"\r\n    },\r\n    {\r\n        \"email\": \"teste@uhu.com\",\r\n        \"nome\": \"joaozinho\",\r\n        \"senha\": \"Senh@123\"\r\n    }\r\n]",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{APP_URL_PAREAQUI}}/usuario/multiplo",
-							"host": [
-								"{{APP_URL_PAREAQUI}}"
-							],
-							"path": [
-								"usuario",
-								"multiplo"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Login",
 					"request": {
 						"method": "POST",
@@ -83,6 +56,30 @@
 							"path": [
 								"usuario",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Esqueci",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/usuario/esqueci?email=teste@uhu.com",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"usuario",
+								"esqueci"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "teste@uhu.com"
+								}
 							]
 						}
 					},
@@ -148,7 +145,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"teste@uhu.com\",\r\n    \"nome\":\"joaozinho\",\r\n    \"senha\":\"Senh@123\"\r\n}",
+							"raw": "{\r\n    \"email\":\"teste@uhu.cssom\",\r\n    \"nome\":\"joaozinssssho\",\r\n    \"senha\":\"Senh@123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -163,6 +160,228 @@
 							"path": [
 								"usuario",
 								"{{usuario_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Endereço",
+			"item": [
+				{
+					"name": "Adiciona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\": \"mario viana\",\r\n    \"numero\": \"501\",\r\n    \"complemento\": \"1402\",\r\n    \"bairro\": \"santa rosa\",\r\n    \"cidade\": \"niteroi\",\r\n    \"estado\": \"RJ\",\r\n    \"pais\": \"brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/endereco",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/endereco",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encontra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/endereco/{{endereco_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"endereco",
+								"{{endereco_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/endereco/{{endereco_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"endereco",
+								"{{endereco_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\": \"mario viana\",\r\n    \"numero\": \"3333\",\r\n    \"complemento\": \"55555\",\r\n    \"bairro\": \"santa rosa\",\r\n    \"cidade\": \"niteroi\",\r\n    \"estado\": \"RJ\",\r\n    \"pais\": \"brasil\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/endereco/{{endereco_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"endereco",
+								"{{endereco_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estacionamento",
+			"item": [
+				{
+					"name": "Adiciona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"dono_id\": \"17\",\r\n    \"endereco_id\": \"24\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/estacionamento",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"estacionamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/estacionamento",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"estacionamento"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encontra",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/estacionamento/{{estacionamento_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"estacionamento",
+								"{{estacionamento_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/estacionamento/{{estacionamento_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"estacionamento",
+								"{{estacionamento_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"teste\",\r\n    \"dono_id\": \"17\",\r\n    \"endereco_id\": \"24\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/estacionamento/{{estacionamento_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"estacionamento",
+								"{{estacionamento_id}}"
 							]
 						}
 					},
@@ -194,7 +413,15 @@
 	"variable": [
 		{
 			"key": "usuario_id",
-			"value": "0"
+			"value": "1"
+		},
+		{
+			"key": "endereco_id",
+			"value": "36"
+		},
+		{
+			"key": "estacionamento_id",
+			"value": "2"
 		}
 	]
 }
