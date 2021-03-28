@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="vaga_tipos")
+@Table(name = "vaga_tipos")
 public class VagaTipo {
     @Id
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
     private String tipo;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String img;
 }

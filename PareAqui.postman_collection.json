@@ -277,6 +277,138 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Tipo de Vaga",
+			"item": [
+				{
+					"name": "Adiciona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": \"teste\",\r\n    \"img\": \"testessss img\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/vaga-tipo",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"vaga-tipo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/vaga-tipo",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"vaga-tipo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/vaga-tipo/{{vaga_tipo_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"vaga-tipo",
+								"{{vaga_tipo_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tamanho de Vaga",
+			"item": [
+				{
+					"name": "Adiciona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tamanho\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/vaga-tamanho",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"vaga-tamanho"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/vaga-tamanho",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"vaga-tamanho"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/vaga-tamanho/{{vaga_tamanho_id}}",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"vaga-tamanho",
+								"{{vaga_tamanho_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -311,6 +443,14 @@
 		{
 			"key": "estacionamento_id",
 			"value": "2"
+		},
+		{
+			"key": "vaga_tamanho_id",
+			"value": "1"
+		},
+		{
+			"key": "vaga_tipo_id",
+			"value": "4"
 		}
 	]
 }
