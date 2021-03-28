@@ -67,8 +67,11 @@ public class UsuarioController {
 
     @PostMapping
     public Map<String, Object> addUsuario(@RequestBody Map<String, ?> input) {
-        Usuario usuario = new Usuario(input.get("email").toString(), input.get("nome").toString(),
-                input.get("senha").toString());
+        Usuario usuario = new Usuario();
+        usuario.setEmail(input.get("email").toString());
+        usuario.setNome(input.get("nome").toString());
+        usuario.setSenha(input.get("senha").toString());
+
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
             usuario = service.saveUsuario(usuario);
@@ -140,8 +143,11 @@ public class UsuarioController {
     public Map<String, Object> updateUsuario(@PathVariable Long id, @RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            Usuario usuario = new Usuario(input.get("email").toString(), input.get("nome").toString(),
-                    input.get("senha").toString());
+            Usuario usuario = new Usuario();
+            usuario.setEmail(input.get("email").toString());
+            usuario.setNome(input.get("nome").toString());
+            usuario.setSenha(input.get("senha").toString());
+
             service.updateUsuario(usuario);
             ret.put("success", true);
             ret.put("message", usuario.getNome() + " recuperado com sucesso.");

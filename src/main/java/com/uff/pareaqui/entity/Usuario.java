@@ -17,19 +17,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
 public class Usuario {
-
-    public Usuario(String email, String nome, String senha) {
-        this.setEmail(email);
-        this.setNome(nome);
-        this.setSenha(senha);
-    }
-
-    public Usuario() {
-        this.setEmail(null);
-        this.setNome(null);
-        this.setSenha(null);
-    }
-
     @Id
     @GeneratedValue
     private Long id;
