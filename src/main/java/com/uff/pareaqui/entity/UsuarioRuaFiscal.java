@@ -14,13 +14,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="usuario_rua_fiscais")
+@Table(name = "usuario_rua_fiscais")
 public class UsuarioRuaFiscal {
     @Id
     @GeneratedValue
     private Long id;
     @ManyToOne
     private Usuario usuario;
-    @ManyToOne
-    private Endereco endereco;
 }

@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.uff.pareaqui.entity.Estacionamento;
+import com.uff.pareaqui.entity.Usuario;
 import com.uff.pareaqui.service.EstacionamentoService;
+import com.uff.pareaqui.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,10 +26,23 @@ public class EstacionamentoController {
     @Autowired
     private EstacionamentoService service;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @PostMapping
-    public Map<String, Object> addEstacionamento(@RequestBody Estacionamento estacionamento) {
+    public Map<String, Object> addEstacionamento(@RequestBody Estacionamento estacionamento,
+            @RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
+            Object donoId = input.get("dono_id");
+            if (donoId != null) {
+                Usuario dono = usuarioService.getUsuarioById(Long.parseLong(donoId.toString()));
+                if (dono == null) {
+                    throw new Exception("O id informado para o dono não pertence a nenhum usuário válido");
+                }
+                estacionamento.setDono(dono);
+            }
+
             estacionamento = service.saveEstacionamento(estacionamento);
 
             ret.put("success", true);

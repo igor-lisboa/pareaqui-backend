@@ -24,15 +24,60 @@ public class Estacionamento {
     private String nome;
     @ManyToOne
     private Usuario dono;
-    @ManyToOne
-    private Endereco endereco;
+    @Column(nullable = false)
+    private String rua;
+    @Column(nullable = false)
+    private Long numero;
+    @Column(nullable = true)
+    private String complemento;
+    @Column(nullable = false)
+    private String bairro;
+    @Column(nullable = false)
+    private String cidade;
+    @Column(nullable = false)
+    private String estado;
+    @Column(nullable = false)
+    private String pais;
 
-    public Usuario getDono() {
-        return dono;
+    public void setCampos(String nome, Usuario dono, String rua, Long numero, String complemento, String bairro,
+            String cidade, String estado, String pais) {
+        this.setNome(nome);
+        this.setDono(dono);
+        this.setRua(rua);
+        this.setNumero(numero);
+        this.setComplemento(complemento);
+        this.setBairro(bairro);
+        this.setCidade(cidade);
+        this.setEstado(estado);
+        this.setPais(pais);
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public void setNumero(Long numero) {
+        this.numero = numero;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
     }
 
     public Long getId() {
@@ -47,15 +92,43 @@ public class Estacionamento {
         this.dono = dono;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Usuario getDono() {
+        return dono;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public Long getNumero() {
+        return numero;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public String getRua() {
+        return rua;
     }
 }
