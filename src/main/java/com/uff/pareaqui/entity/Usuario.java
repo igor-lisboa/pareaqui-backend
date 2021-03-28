@@ -25,6 +25,9 @@ public class Usuario {
     }
 
     public Usuario() {
+        this.setEmail(null);
+        this.setNome(null);
+        this.setSenha(null);
     }
 
     @Id

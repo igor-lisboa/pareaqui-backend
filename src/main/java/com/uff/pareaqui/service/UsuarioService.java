@@ -26,6 +26,14 @@ public class UsuarioService {
         return null;
     }
 
+    public Usuario esqueciSenha(String email) {
+        Collection<Usuario> usuarios = repository.findByEmail(email);
+        if (usuarios.size() == 1) {
+            return (Usuario) usuarios.toArray()[0];
+        }
+        return null;
+    }
+
     public List<Usuario> saveUsuarios(List<Usuario> usuarios) {
         return repository.saveAll(usuarios);
     }

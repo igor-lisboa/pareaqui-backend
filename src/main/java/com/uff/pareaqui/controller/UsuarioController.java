@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -35,6 +36,26 @@ public class UsuarioController {
             }
             ret.put("success", true);
             ret.put("message", "Seja bem vindo " + usuario.getNome() + ".");
+            ret.put("data", usuario);
+        } catch (Exception exception) {
+            ret.put("success", false);
+            ret.put("data", null);
+            ret.put("message", exception.getMessage());
+        }
+        return ret;
+    }
+
+    @GetMapping("/esqueci")
+    public Map<String, Object> esqueci(@RequestParam(name = "email") String email) {
+        Map<String, Object> ret = new HashMap<String, Object>();
+        try {
+            Usuario usuario = service.esqueciSenha(email);
+
+            if (usuario == null) {
+                throw new Exception("Esse email não pertence a nenhum usuário no cadastro");
+            }
+            ret.put("success", true);
+            ret.put("message", "Sua senha é: [" + usuario.getSenha() + "].");
             ret.put("data", usuario);
         } catch (Exception exception) {
             ret.put("success", false);
