@@ -31,9 +31,9 @@ public class EstacionamentoService {
 
     public Estacionamento updateEstacionamento(Long id, Estacionamento estacionamento) {
         Estacionamento estacionamentoAtualiza = repository.getOne(id);
-        estacionamentoAtualiza.setNome(estacionamento.getNome());
-        estacionamentoAtualiza.setDono(estacionamento.getDono());
-        estacionamentoAtualiza.setEndereco(estacionamento.getEndereco());
+        estacionamentoAtualiza.setCampos(estacionamento.getNome(), estacionamento.getDono(), estacionamento.getRua(),
+                estacionamento.getNumero(), estacionamento.getComplemento(), estacionamento.getBairro(),
+                estacionamento.getCidade(), estacionamento.getEstado(), estacionamento.getPais());
         return this.saveEstacionamento(estacionamentoAtualiza);
     }
 }
