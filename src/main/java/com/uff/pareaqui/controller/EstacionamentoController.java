@@ -30,18 +30,71 @@ public class EstacionamentoController {
     private UsuarioService usuarioService;
 
     @PostMapping
-    public Map<String, Object> addEstacionamento(@RequestBody Estacionamento estacionamento,
-            @RequestBody Map<String, ?> input) {
+    public Map<String, Object> addEstacionamento(@RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
+            Estacionamento estacionamento = new Estacionamento();
+
             Object donoId = input.get("dono_id");
+            Usuario dono = new Usuario();
             if (donoId != null) {
-                Usuario dono = usuarioService.getUsuarioById(Long.parseLong(donoId.toString()));
+                dono = usuarioService.getUsuarioById(Long.parseLong(donoId.toString()));
                 if (dono == null) {
                     throw new Exception("O id informado para o dono não pertence a nenhum usuário válido");
                 }
-                estacionamento.setDono(dono);
             }
+
+            String nome = null;
+            Object getNome = input.get("nome");
+            if (getNome == null) {
+                throw new Exception("Informe um nome para o Estacionamento");
+            } else {
+                nome = getNome.toString();
+            }
+
+            String rua = null;
+            Object getRua = input.get("rua");
+            if (getRua != null) {
+                rua = getRua.toString();
+            }
+
+            Long numero = null;
+            Object getNumero = input.get("numero");
+            if (getNumero != null) {
+                numero = Long.parseLong(getNumero.toString());
+            }
+
+            String bairro = null;
+            Object getBairro = input.get("bairro");
+            if (getBairro != null) {
+                bairro = getBairro.toString();
+            }
+
+            String complemento = null;
+            Object getComplemento = input.get("complemento");
+            if (getComplemento != null) {
+                complemento = getComplemento.toString();
+            }
+
+            String cidade = null;
+            Object getCidade = input.get("cidade");
+            if (getCidade != null) {
+                cidade = getCidade.toString();
+            }
+
+            String estado = null;
+            Object getEstado = input.get("estado");
+            if (getEstado != null) {
+                estado = getEstado.toString();
+            }
+
+            String pais = null;
+            Object getPais = input.get("pais");
+            if (getPais != null) {
+                pais = getBairro.toString();
+            }
+
+            estacionamento.setCampos(nome, dono, rua, numero, complemento, bairro, cidade, estado, pais);
 
             estacionamento = service.saveEstacionamento(estacionamento);
 
@@ -92,9 +145,72 @@ public class EstacionamentoController {
     }
 
     @PutMapping("/{id}")
-    public Map<String, Object> updateEstacionamento(@PathVariable Long id, @RequestBody Estacionamento estacionamento) {
+    public Map<String, Object> updateEstacionamento(@PathVariable Long id, @RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
+            Estacionamento estacionamento = new Estacionamento();
+
+            Object donoId = input.get("dono_id");
+            Usuario dono = new Usuario();
+            if (donoId != null) {
+                dono = usuarioService.getUsuarioById(Long.parseLong(donoId.toString()));
+                if (dono == null) {
+                    throw new Exception("O id informado para o dono não pertence a nenhum usuário válido");
+                }
+            }
+
+            String nome = null;
+            Object getNome = input.get("nome");
+            if (getNome == null) {
+                throw new Exception("Informe um nome para o Estacionamento");
+            } else {
+                nome = getNome.toString();
+            }
+
+            String rua = null;
+            Object getRua = input.get("rua");
+            if (getRua != null) {
+                rua = getRua.toString();
+            }
+
+            Long numero = null;
+            Object getNumero = input.get("numero");
+            if (getNumero != null) {
+                numero = Long.parseLong(getNumero.toString());
+            }
+
+            String bairro = null;
+            Object getBairro = input.get("bairro");
+            if (getBairro != null) {
+                bairro = getBairro.toString();
+            }
+
+            String complemento = null;
+            Object getComplemento = input.get("complemento");
+            if (getComplemento != null) {
+                complemento = getComplemento.toString();
+            }
+
+            String cidade = null;
+            Object getCidade = input.get("cidade");
+            if (getCidade != null) {
+                cidade = getCidade.toString();
+            }
+
+            String estado = null;
+            Object getEstado = input.get("estado");
+            if (getEstado != null) {
+                estado = getEstado.toString();
+            }
+
+            String pais = null;
+            Object getPais = input.get("pais");
+            if (getPais != null) {
+                pais = getBairro.toString();
+            }
+
+            estacionamento.setCampos(nome, dono, rua, numero, complemento, bairro, cidade, estado, pais);
+
             estacionamento = service.updateEstacionamento(id, estacionamento);
             ret.put("success", true);
             ret.put("message", estacionamento.getNome() + " atualizado com sucesso.");
