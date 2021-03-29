@@ -3,7 +3,7 @@ package com.uff.pareaqui.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +19,18 @@ public class UsuarioRuaFiscal {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne
+    @OneToOne
     private Usuario usuario;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
 }

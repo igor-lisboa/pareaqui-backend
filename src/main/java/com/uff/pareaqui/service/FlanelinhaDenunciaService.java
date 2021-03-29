@@ -11,7 +11,7 @@ public class FlanelinhaDenunciaService {
     @Autowired
     private FlanelinhaDenunciaRepository repository;
 
-    public FlanelinhaDenuncia saveFlanelinhaDenuncia(FlanelinhaDenuncia vagaTamanho) {
-        return repository.save(vagaTamanho);
+    public FlanelinhaDenuncia saveFlanelinhaDenuncia(FlanelinhaDenuncia flanelinhaDenuncia) {
+        return repository.save(flanelinhaDenuncia);
     }
 }

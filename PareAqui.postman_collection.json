@@ -9,6 +9,76 @@
 			"name": "Usuário",
 			"item": [
 				{
+					"name": "Fiscal",
+					"item": [
+						{
+							"name": "Deleta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/usuario/fiscal/{{usuario_rua_fiscal_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"usuario",
+										"fiscal",
+										"{{usuario_rua_fiscal_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontra FIscal Pelo Id do Usuário",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/usuario/fiscal/{{usuario_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"usuario",
+										"fiscal",
+										"{{usuario_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adiciona",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario_id\":\"{{usuario_id}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/usuario/fiscal",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"usuario",
+										"fiscal"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Adiciona",
 					"request": {
 						"method": "POST",
@@ -466,7 +536,7 @@
 	"variable": [
 		{
 			"key": "usuario_id",
-			"value": "1"
+			"value": "15"
 		},
 		{
 			"key": "endereco_id",
@@ -483,6 +553,10 @@
 		{
 			"key": "vaga_tipo_id",
 			"value": "4"
+		},
+		{
+			"key": "usuario_rua_fiscal_id",
+			"value": "16"
 		}
 	]
 }
