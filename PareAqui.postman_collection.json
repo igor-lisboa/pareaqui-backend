@@ -409,6 +409,38 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Flanelinha",
+			"item": [
+				{
+					"name": "Denuncia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\":\"teste rua\",\r\n    \"numero\":\"34234\",\r\n    \"complemento\":\"miss\",\r\n    \"bairro\":\"xxx\",\r\n    \"cidade\":\"asdasdade\",\r\n    \"estado\":\"rj\",\r\n    \"pais\":\"ihi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/flanelinha/denuncia",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"flanelinha",
+								"denuncia"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
