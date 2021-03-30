@@ -241,6 +241,152 @@
 			"name": "Estacionamento",
 			"item": [
 				{
+					"name": "Funcionário",
+					"item": [
+						{
+							"name": "Adiciona",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"funcionario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontra por Estacionamento e Usuário",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario/{{estacionamento_id}}/{{usuario_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"funcionario",
+										"{{estacionamento_id}}",
+										"{{usuario_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontra por id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario/{{usuario_estacionamento_funcionario}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"funcionario",
+										"{{usuario_estacionamento_funcionario}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario/{{usuario_estacionamento_funcionario}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"funcionario",
+										"{{usuario_estacionamento_funcionario}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lista por Estacionamento",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario/{{estacionamento_id}}/todos",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"funcionario",
+										"{{estacionamento_id}}",
+										"todos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Adiciona",
 					"request": {
 						"method": "POST",
@@ -544,7 +690,7 @@
 		},
 		{
 			"key": "estacionamento_id",
-			"value": "2"
+			"value": "17"
 		},
 		{
 			"key": "vaga_tamanho_id",
@@ -557,6 +703,10 @@
 		{
 			"key": "usuario_rua_fiscal_id",
 			"value": "16"
+		},
+		{
+			"key": "usuario_estacionamento_funcionario",
+			"value": "18"
 		}
 	]
 }
