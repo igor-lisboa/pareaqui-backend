@@ -739,6 +739,109 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Rua",
+			"item": [
+				{
+					"name": "Vaga",
+					"item": [
+						{
+							"name": "Adiciona",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rua\": \"teste rua\",\r\n    \"numero\": \"2222\",\r\n    \"complemento\": null,\r\n    \"bairro\": \"santa\",\r\n    \"cidade\": \"sl\",\r\n    \"estado\": \"rj\",\r\n    \"pais\": \"br\",\r\n    \"vaga_tipo_id\": \"{{vaga_tipo_id}}\",\r\n    \"vaga_tamanho_id\": \"{{vaga_tamanho_id}}\",\r\n    \"preco\": 18,\r\n    \"identificacao\": \"teste c2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/rua/vaga",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"rua",
+										"vaga"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"rua\": \"teste rua\",\r\n    \"numero\": \"2222\",\r\n    \"complemento\": null,\r\n    \"bairro\": \"santa\",\r\n    \"cidade\": \"sl\",\r\n    \"estado\": \"rj\",\r\n    \"pais\": \"br\",\r\n    \"vaga_tipo_id\": \"{{vaga_tipo_id}}\",\r\n    \"vaga_tamanho_id\": \"{{vaga_tamanho_id}}\",\r\n    \"preco\": 18,\r\n    \"identificacao\": \"teste c2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/rua/vaga/{{rua_vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"rua",
+										"vaga",
+										"{{rua_vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontra",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/rua/vaga/{{rua_vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"rua",
+										"vaga",
+										"{{rua_vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/rua/vaga/{{rua_vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"rua",
+										"vaga",
+										"{{rua_vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	],
 	"event": [
@@ -793,6 +896,10 @@
 		{
 			"key": "estacionamento_vaga_id",
 			"value": "13"
+		},
+		{
+			"key": "rua_vaga_id",
+			"value": "24"
 		}
 	]
 }
