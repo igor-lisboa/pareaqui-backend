@@ -1,6 +1,5 @@
 package com.uff.pareaqui.controller;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
