@@ -17,6 +17,10 @@ public class VagaTipoService {
         return repository.save(vagaTipo);
     }
 
+    public VagaTipo getVagaTipoById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public List<VagaTipo> getVagaTipos() {
         return repository.findAll();
     }

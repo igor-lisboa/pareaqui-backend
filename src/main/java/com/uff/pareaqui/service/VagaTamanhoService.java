@@ -17,6 +17,10 @@ public class VagaTamanhoService {
         return repository.save(vagaTamanho);
     }
 
+    public VagaTamanho getVagaTamanhoById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public List<VagaTamanho> getVagaTamanhos() {
         return repository.findAll();
     }

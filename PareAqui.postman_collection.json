@@ -272,21 +272,9 @@
 						},
 						{
 							"name": "Encontra por Estacionamento e Usuário",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario/{{estacionamento_id}}/{{usuario_id}}",
 									"host": [
@@ -304,21 +292,9 @@
 						},
 						{
 							"name": "Encontra por id",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario/{{usuario_estacionamento_funcionario}}",
 									"host": [
@@ -354,21 +330,9 @@
 						},
 						{
 							"name": "Lista por Estacionamento",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/funcionario/{{estacionamento_id}}/todos",
 									"host": [
@@ -379,6 +343,124 @@
 										"funcionario",
 										"{{estacionamento_id}}",
 										"todos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Vaga",
+					"item": [
+						{
+							"name": "Adiciona",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\",\r\n    \"vaga_tipo_id\": \"{{vaga_tipo_id}}\",\r\n    \"vaga_tamanho_id\": \"{{vaga_tamanho_id}}\",\r\n    \"preco\": 18,\r\n    \"identificacao\": \"teste c2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/vaga",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"vaga"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"estacionamento_id\": \"{{estacionamento_id}}\",\r\n    \"vaga_tipo_id\": \"{{vaga_tipo_id}}\",\r\n    \"vaga_tamanho_id\": \"{{vaga_tamanho_id}}\",\r\n    \"preco\": \"12.44\",\r\n    \"identificacao\": \"teste c2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/vaga/{{estacionamento_vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"vaga",
+										"{{estacionamento_vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontra",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/vaga/{{estacionamento_vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"vaga",
+										"{{estacionamento_vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Deleta",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/vaga/{{estacionamento_vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"vaga",
+										"{{estacionamento_vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Todas do Estacionamento",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/estacionamento/vaga/{{estacionamento_id}}/todas",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"estacionamento",
+										"vaga",
+										"{{estacionamento_id}}",
+										"todas"
 									]
 								}
 							},
@@ -682,7 +764,7 @@
 	"variable": [
 		{
 			"key": "usuario_id",
-			"value": "15"
+			"value": "1"
 		},
 		{
 			"key": "endereco_id",
@@ -690,15 +772,15 @@
 		},
 		{
 			"key": "estacionamento_id",
-			"value": "17"
+			"value": "11"
 		},
 		{
 			"key": "vaga_tamanho_id",
-			"value": "1"
+			"value": "16"
 		},
 		{
 			"key": "vaga_tipo_id",
-			"value": "4"
+			"value": "6"
 		},
 		{
 			"key": "usuario_rua_fiscal_id",
@@ -707,6 +789,10 @@
 		{
 			"key": "usuario_estacionamento_funcionario",
 			"value": "18"
+		},
+		{
+			"key": "estacionamento_vaga_id",
+			"value": "13"
 		}
 	]
 }
