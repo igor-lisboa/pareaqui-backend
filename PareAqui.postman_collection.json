@@ -947,6 +947,106 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Ocupação",
+					"item": [
+						{
+							"name": "Inclui",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"vaga_id\": \"{{vaga_id}}\",\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"entrada\": \"2022-03-12 03:02:36\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/ocupacao",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"ocupacao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atualiza Saída",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"saida\": \"2022-03-12 03:02:38\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/ocupacao/{{vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"ocupacao",
+										"{{vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Histórico Usuário",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/ocupacao/usuario/{{usuario_id}}/historico",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"ocupacao",
+										"usuario",
+										"{{usuario_id}}",
+										"historico"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontra Ocupação da Vaga",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/ocupacao/{{vaga_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"ocupacao",
+										"{{vaga_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

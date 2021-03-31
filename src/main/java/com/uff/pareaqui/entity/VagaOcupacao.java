@@ -1,5 +1,7 @@
 package com.uff.pareaqui.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,7 +28,47 @@ public class VagaOcupacao {
     @ManyToOne
     private Usuario usuario;
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date entrada;
+    private Date entrada;
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date saida;
+    private Date saida;
+
+    public Date getEntrada() {
+        return entrada;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Date getSaida() {
+        return saida;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Vaga getVaga() {
+        return vaga;
+    }
+
+    public void setEntrada(Date entrada) {
+        this.entrada = entrada;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setSaida(Date saida) {
+        this.saida = saida;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setVaga(Vaga vaga) {
+        this.vaga = vaga;
+    }
 }
