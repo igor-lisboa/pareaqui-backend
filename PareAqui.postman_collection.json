@@ -842,6 +842,113 @@
 					]
 				}
 			]
+		},
+		{
+			"name": "Vaga",
+			"item": [
+				{
+					"name": "Acidente",
+					"item": [
+						{
+							"name": "Adiciona",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"vaga_id\": \"{{vaga_id}}\",\r\n    \"descricao\": \"entao, entrou um bebado dirigindo um opala e bateu no citroen q estava na vaga\",\r\n    \"momento\": \"2020-03-12 03:02:36\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/acidente",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"acidente"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Agendamento",
+					"item": [
+						{
+							"name": "Adicionar",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"vaga_id\": \"{{vaga_id}}\",\r\n    \"usuario_id\": \"{{usuario_id}}\",\r\n    \"momento\": \"2022-03-12 03:02:36\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/agendamento",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"agendamento"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delata",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/agendamento/{{vaga_agendamento_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"agendamento",
+										"{{vaga_agendamento_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Encontra Agendamentos Futuros pelo usuário",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APP_URL_PAREAQUI}}/vaga/agendamento/{{usuario_id}}",
+									"host": [
+										"{{APP_URL_PAREAQUI}}"
+									],
+									"path": [
+										"vaga",
+										"agendamento",
+										"{{usuario_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
 		}
 	],
 	"event": [
@@ -875,15 +982,15 @@
 		},
 		{
 			"key": "estacionamento_id",
-			"value": "11"
+			"value": "2"
 		},
 		{
 			"key": "vaga_tamanho_id",
-			"value": "16"
+			"value": "4"
 		},
 		{
 			"key": "vaga_tipo_id",
-			"value": "6"
+			"value": "5"
 		},
 		{
 			"key": "usuario_rua_fiscal_id",
@@ -891,7 +998,7 @@
 		},
 		{
 			"key": "usuario_estacionamento_funcionario",
-			"value": "18"
+			"value": "8"
 		},
 		{
 			"key": "estacionamento_vaga_id",
@@ -899,7 +1006,15 @@
 		},
 		{
 			"key": "rua_vaga_id",
-			"value": "24"
+			"value": "7"
+		},
+		{
+			"key": "vaga_id",
+			"value": "6"
+		},
+		{
+			"key": "vaga_agendamento_id",
+			"value": "14"
 		}
 	]
 }
