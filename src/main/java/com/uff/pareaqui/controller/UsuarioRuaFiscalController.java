@@ -3,10 +3,8 @@ package com.uff.pareaqui.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.uff.pareaqui.entity.Usuario;
 import com.uff.pareaqui.entity.UsuarioRuaFiscal;
 import com.uff.pareaqui.service.UsuarioRuaFiscalService;
-import com.uff.pareaqui.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,35 +22,14 @@ public class UsuarioRuaFiscalController {
     @Autowired
     private UsuarioRuaFiscalService service;
 
-    @Autowired
-    private UsuarioService usuarioService;
-
     @PostMapping
     public Map<String, Object> addUsuarioRuaFiscal(@RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            UsuarioRuaFiscal usuarioRuaFiscal = new UsuarioRuaFiscal();
-
-            Object usuarioId = input.get("usuario_id");
-            if (usuarioId == null) {
-                throw new Exception("Informe o id do usuário que será promovido a fiscal de ruas");
-            }
-
-            Usuario usuario = usuarioService.getUsuarioById(Long.parseLong(usuarioId.toString()));
-            if (usuario == null) {
-                throw new Exception("O usuário escolhido para ser promovido a fiscal de ruas não existe");
-            }
-            usuarioRuaFiscal.setUsuario(usuario);
-
-            UsuarioRuaFiscal usuarioFiscal = service.findByUsuarioId(usuario.getId());
-            if (usuarioFiscal != null) {
-                throw new Exception("O usuário escolhido para ser promovido a fiscal já foi promovido");
-            }
-
-            usuarioRuaFiscal = service.saveUsuarioRuaFiscal(usuarioRuaFiscal);
+            ret.put("data", service
+                    .saveUsuarioRuaFiscalCompleto(Long.parseLong(String.valueOf((Object) input.get("usuario_id")))));
             ret.put("success", true);
             ret.put("message", "O Usuário foi cadastrado como fiscal de ruas com sucesso.");
-            ret.put("data", usuarioRuaFiscal);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
@@ -70,7 +47,7 @@ public class UsuarioRuaFiscalController {
                 throw new Exception("O id informado não pertence a nenhum fiscal de ruas.");
             }
             ret.put("success", true);
-            ret.put("message", "Fiscais de ruas recuperados com sucesso.");
+            ret.put("message", "Fiscal de rua recuperado com sucesso.");
             ret.put("data", usuarioFiscal);
         } catch (Exception exception) {
             ret.put("success", false);

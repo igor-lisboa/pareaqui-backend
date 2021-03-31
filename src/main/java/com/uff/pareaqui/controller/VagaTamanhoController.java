@@ -1,7 +1,6 @@
 package com.uff.pareaqui.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.uff.pareaqui.entity.VagaTamanho;
@@ -27,10 +26,9 @@ public class VagaTamanhoController {
     public Map<String, Object> addVagaTamanho(@RequestBody VagaTamanho vagaTamanho) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            vagaTamanho = service.saveVagaTamanho(vagaTamanho);
+            ret.put("data", service.saveVagaTamanho(vagaTamanho));
             ret.put("success", true);
             ret.put("message", "O Tamanho de Vaga foi cadastrado com sucesso.");
-            ret.put("data", vagaTamanho);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
@@ -43,10 +41,9 @@ public class VagaTamanhoController {
     public Map<String, Object> findAllVagaTamanhos() {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            List<VagaTamanho> vagaTamanhosEncontrados = service.getVagaTamanhos();
+            ret.put("data", service.getVagaTamanhos());
             ret.put("success", true);
             ret.put("message", "Tamanhos de Vaga recuperados com sucesso.");
-            ret.put("data", vagaTamanhosEncontrados);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);

@@ -27,10 +27,9 @@ public class VagaTipoController {
     public Map<String, Object> addVagaTipo(@RequestBody VagaTipo vagaTipo) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            vagaTipo = service.saveVagaTipo(vagaTipo);
+            ret.put("data", service.saveVagaTipo(vagaTipo));
             ret.put("success", true);
             ret.put("message", "O Tipo de Vaga foi cadastrado com sucesso.");
-            ret.put("data", vagaTipo);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
@@ -43,10 +42,9 @@ public class VagaTipoController {
     public Map<String, Object> findAllVagaTipos() {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            List<VagaTipo> vagaTiposEncontrados = service.getVagaTipos();
+            ret.put("data", service.getVagaTipos());
             ret.put("success", true);
             ret.put("message", "Tipos de Vaga recuperados com sucesso.");
-            ret.put("data", vagaTiposEncontrados);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
