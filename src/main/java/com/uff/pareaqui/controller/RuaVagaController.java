@@ -27,24 +27,17 @@ public class RuaVagaController {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
             String rua = String.valueOf((Object) input.get("rua"));
-            Long numero = Long.parseLong(String.valueOf((Object) input.get("numero")));
-            String complemento = String.valueOf((Object) input.get("complemento"));
-            String bairro = String.valueOf((Object) input.get("bairro"));
-            String cidade = String.valueOf((Object) input.get("cidade"));
-            String estado = String.valueOf((Object) input.get("estado"));
-            String pais = String.valueOf((Object) input.get("pais"));
-
-            Long vagaTipoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id")));
-            Long vagaTamanhoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id")));
-            Float preco = Float.parseFloat(String.valueOf((Object) input.get("preco")));
-            String identificacao = String.valueOf((Object) input.get("identificacao"));
-
-            RuaVaga ruaVaga = service.saveRuaVagaCompleta(rua, numero, complemento, bairro, cidade, estado, pais,
-                    vagaTipoId, vagaTamanhoId, preco, identificacao);
-
-            ret.put("success", true);
+            ret.put("data",
+                    service.saveRuaVagaCompleta(rua, Long.parseLong(String.valueOf((Object) input.get("numero"))),
+                            String.valueOf((Object) input.get("complemento")),
+                            String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("cidade")),
+                            String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais")),
+                            Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id"))),
+                            Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id"))),
+                            Float.parseFloat(String.valueOf((Object) input.get("preco"))),
+                            String.valueOf((Object) input.get("identificacao"))));
             ret.put("message", "A vaga da rua " + rua + " foi adicionada.");
-            ret.put("data", ruaVaga);
+            ret.put("success", true);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
@@ -58,23 +51,17 @@ public class RuaVagaController {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
             String rua = String.valueOf((Object) input.get("rua"));
-            Long numero = Long.parseLong(String.valueOf((Object) input.get("numero")));
-            String complemento = String.valueOf((Object) input.get("complemento"));
-            String bairro = String.valueOf((Object) input.get("bairro"));
-            String cidade = String.valueOf((Object) input.get("cidade"));
-            String estado = String.valueOf((Object) input.get("estado"));
-            String pais = String.valueOf((Object) input.get("pais"));
-
-            Long vagaTipoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id")));
-            Long vagaTamanhoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id")));
-            Float preco = Float.parseFloat(String.valueOf((Object) input.get("preco")));
-            String identificacao = String.valueOf((Object) input.get("identificacao"));
-
-            RuaVaga ruaVaga = service.updateRuaVagaCompleta(id, rua, numero, complemento, bairro, cidade, estado, pais,
-                    vagaTipoId, vagaTamanhoId, preco, identificacao);
-            ret.put("success", true);
+            ret.put("data",
+                    service.updateRuaVagaCompleta(id, rua, Long.parseLong(String.valueOf((Object) input.get("numero"))),
+                            String.valueOf((Object) input.get("complemento")),
+                            String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("cidade")),
+                            String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais")),
+                            Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id"))),
+                            Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id"))),
+                            Float.parseFloat(String.valueOf((Object) input.get("preco"))),
+                            String.valueOf((Object) input.get("identificacao"))));
             ret.put("message", "Vaga da rua " + rua + " recuperada com sucesso.");
-            ret.put("data", ruaVaga);
+            ret.put("success", true);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);

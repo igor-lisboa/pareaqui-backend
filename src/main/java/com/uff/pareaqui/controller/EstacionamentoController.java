@@ -1,13 +1,10 @@
 package com.uff.pareaqui.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.uff.pareaqui.entity.Estacionamento;
-import com.uff.pareaqui.entity.Usuario;
 import com.uff.pareaqui.service.EstacionamentoService;
-import com.uff.pareaqui.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
