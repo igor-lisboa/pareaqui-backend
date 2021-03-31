@@ -24,6 +24,10 @@ public class VagaService {
         return repository.save(vaga);
     }
 
+    public Vaga getVaga(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public Vaga saveVagaCompleta(Long vagaTipoId, Long vagaTamanhoId, Float preco, String identificacao)
             throws Exception {
         VagaTipo tipo = vagaTipoService.getVagaTipoById(vagaTipoId);

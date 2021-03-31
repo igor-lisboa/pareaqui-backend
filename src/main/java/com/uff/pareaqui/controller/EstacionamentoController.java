@@ -26,81 +26,20 @@ public class EstacionamentoController {
     @Autowired
     private EstacionamentoService service;
 
-    @Autowired
-    private UsuarioService usuarioService;
-
     @PostMapping
     public Map<String, Object> addEstacionamento(@RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            Estacionamento estacionamento = new Estacionamento();
-
-            Object donoId = input.get("dono_id");
-            Usuario dono = new Usuario();
-            if (donoId != null) {
-                dono = usuarioService.getUsuarioById(Long.parseLong(donoId.toString()));
-                if (dono == null) {
-                    throw new Exception("O id informado para o dono não pertence a nenhum usuário válido");
-                }
-            }
-
-            String nome = null;
-            Object getNome = input.get("nome");
-            if (getNome == null) {
-                throw new Exception("Informe um nome para o Estacionamento");
-            } else {
-                nome = getNome.toString();
-            }
-
-            String rua = null;
-            Object getRua = input.get("rua");
-            if (getRua != null) {
-                rua = getRua.toString();
-            }
-
-            Long numero = null;
-            Object getNumero = input.get("numero");
-            if (getNumero != null) {
-                numero = Long.parseLong(getNumero.toString());
-            }
-
-            String bairro = null;
-            Object getBairro = input.get("bairro");
-            if (getBairro != null) {
-                bairro = getBairro.toString();
-            }
-
-            String complemento = null;
-            Object getComplemento = input.get("complemento");
-            if (getComplemento != null) {
-                complemento = getComplemento.toString();
-            }
-
-            String cidade = null;
-            Object getCidade = input.get("cidade");
-            if (getCidade != null) {
-                cidade = getCidade.toString();
-            }
-
-            String estado = null;
-            Object getEstado = input.get("estado");
-            if (getEstado != null) {
-                estado = getEstado.toString();
-            }
-
-            String pais = null;
-            Object getPais = input.get("pais");
-            if (getPais != null) {
-                pais = getBairro.toString();
-            }
-
-            estacionamento.setCampos(nome, dono, rua, numero, complemento, bairro, cidade, estado, pais);
-
-            estacionamento = service.saveEstacionamento(estacionamento);
-
+            ret.put("data",
+                    service.saveEstacionamentoCompleto(Long.parseLong(String.valueOf((Object) input.get("dono_id"))),
+                            String.valueOf((Object) input.get("nome")), String.valueOf((Object) input.get("rua")),
+                            Long.parseLong(String.valueOf((Object) input.get("numero"))),
+                            String.valueOf((Object) input.get("bairro")),
+                            String.valueOf((Object) input.get("complemento")),
+                            String.valueOf((Object) input.get("cidade")), String.valueOf((Object) input.get("estado")),
+                            String.valueOf((Object) input.get("pais"))));
             ret.put("success", true);
-            ret.put("message", "O estacionamento " + estacionamento.getNome() + " foi cadastrado com sucesso.");
-            ret.put("data", estacionamento);
+            ret.put("message", "O estacionamento foi cadastrado com sucesso.");
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
@@ -113,10 +52,9 @@ public class EstacionamentoController {
     public Map<String, Object> findAllEstacionamentos() {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            List<Estacionamento> estacionamentosEncontrados = service.getEstacionamentos();
+            ret.put("data", service.getEstacionamentos());
             ret.put("success", true);
             ret.put("message", "Estacionamentos recuperados com sucesso.");
-            ret.put("data", estacionamentosEncontrados);
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
@@ -131,7 +69,7 @@ public class EstacionamentoController {
         try {
             Estacionamento estacionamento = service.getEstacionamentoById(id);
             if (estacionamento == null) {
-                throw new Exception("O id informado não pertence a nenhum usuário.");
+                throw new Exception("O id informado não pertence a nenhum estacionamento.");
             }
             ret.put("success", true);
             ret.put("message", "Estacionamento recuperado com sucesso.");
@@ -148,73 +86,15 @@ public class EstacionamentoController {
     public Map<String, Object> updateEstacionamento(@PathVariable Long id, @RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            Estacionamento estacionamento = new Estacionamento();
-
-            Object donoId = input.get("dono_id");
-            Usuario dono = new Usuario();
-            if (donoId != null) {
-                dono = usuarioService.getUsuarioById(Long.parseLong(donoId.toString()));
-                if (dono == null) {
-                    throw new Exception("O id informado para o dono não pertence a nenhum usuário válido");
-                }
-            }
-
-            String nome = null;
-            Object getNome = input.get("nome");
-            if (getNome == null) {
-                throw new Exception("Informe um nome para o Estacionamento");
-            } else {
-                nome = getNome.toString();
-            }
-
-            String rua = null;
-            Object getRua = input.get("rua");
-            if (getRua != null) {
-                rua = getRua.toString();
-            }
-
-            Long numero = null;
-            Object getNumero = input.get("numero");
-            if (getNumero != null) {
-                numero = Long.parseLong(getNumero.toString());
-            }
-
-            String bairro = null;
-            Object getBairro = input.get("bairro");
-            if (getBairro != null) {
-                bairro = getBairro.toString();
-            }
-
-            String complemento = null;
-            Object getComplemento = input.get("complemento");
-            if (getComplemento != null) {
-                complemento = getComplemento.toString();
-            }
-
-            String cidade = null;
-            Object getCidade = input.get("cidade");
-            if (getCidade != null) {
-                cidade = getCidade.toString();
-            }
-
-            String estado = null;
-            Object getEstado = input.get("estado");
-            if (getEstado != null) {
-                estado = getEstado.toString();
-            }
-
-            String pais = null;
-            Object getPais = input.get("pais");
-            if (getPais != null) {
-                pais = getBairro.toString();
-            }
-
-            estacionamento.setCampos(nome, dono, rua, numero, complemento, bairro, cidade, estado, pais);
-
-            estacionamento = service.updateEstacionamento(id, estacionamento);
+            ret.put("data", service.updateEstacionamentoCompleto(id,
+                    Long.parseLong(String.valueOf((Object) input.get("dono_id"))),
+                    String.valueOf((Object) input.get("nome")), String.valueOf((Object) input.get("rua")),
+                    Long.parseLong(String.valueOf((Object) input.get("numero"))),
+                    String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("complemento")),
+                    String.valueOf((Object) input.get("cidade")), String.valueOf((Object) input.get("estado")),
+                    String.valueOf((Object) input.get("pais"))));
             ret.put("success", true);
-            ret.put("message", estacionamento.getNome() + " atualizado com sucesso.");
-            ret.put("data", estacionamento);
+            ret.put("message", "Estacionamento " + id + " atualizado com sucesso.");
         } catch (Exception exception) {
             ret.put("success", false);
             ret.put("data", null);
