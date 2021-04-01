@@ -10,6 +10,7 @@ import com.uff.pareaqui.repository.VagaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,8 +32,9 @@ public class VagaService {
         return repository.save(vaga);
     }
 
-    public List<Map<String, Object>> filtraVagas() {
-        return jdbcTemplate.queryForList("SELECT * FROM vagas");
+    public List<Map<String, Object>> filtraVagas(Long vagaId) {
+        return jdbcTemplate.queryForList("SELECT * FROM vagas WHERE id = :id",
+                new MapSqlParameterSource().addValue("id", vagaId));
     }
 
     public Vaga getVaga(Long id) {

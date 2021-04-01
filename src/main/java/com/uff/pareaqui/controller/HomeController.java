@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class HomeController {
-    @GetMapping
+    @GetMapping("")
     public Map<String, Object> welcome() {
         Map<String, Object> ret = new HashMap<String, Object>();
         ret.put("success", true);
