@@ -66,7 +66,7 @@ public class VagaService {
 
         if (semFlanelinha) {
             where += (where == "" ? " WHERE " : " AND ")
-                    + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.complemento,consulta_vagas.rua,consulta_vagas.numero) NOT IN (SELECT DISTINCT CONCAT(pais,estado,cidade,bairro,complemento,rua,numero) FROM flanelinha_denuncias))";
+                    + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.rua) NOT LIKE (SELECT CONCAT('%',GROUP_CONCAT(DISTINCT CONCAT(pais,estado,cidade,bairro,rua)),'%') FROM flanelinha_denuncias))";
         }
 
         String order = "";
