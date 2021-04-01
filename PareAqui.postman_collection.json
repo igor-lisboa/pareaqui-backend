@@ -753,7 +753,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"rua\": \"teste rua\",\r\n    \"numero\": \"2222\",\r\n    \"complemento\": null,\r\n    \"bairro\": \"santa\",\r\n    \"cidade\": \"sl\",\r\n    \"estado\": \"rj\",\r\n    \"pais\": \"br\",\r\n    \"vaga_tipo_id\": \"{{vaga_tipo_id}}\",\r\n    \"vaga_tamanho_id\": \"{{vaga_tamanho_id}}\",\r\n    \"preco\": 18,\r\n    \"identificacao\": \"teste c2\"\r\n}",
+									"raw": "{\r\n    \"rua\": \"teste rua\",\r\n    \"numero\": \"2222\",\r\n    \"complemento\": null,\r\n    \"bairro\": \"santa\",\r\n    \"cidade\": \"sl\",\r\n    \"estado\": \"rj\",\r\n    \"pais\": \"br\",\r\n    \"vaga_tipo_id\": \"{{vaga_tipo_id}}\",\r\n    \"vaga_tamanho_id\": \"{{vaga_tamanho_id}}\",\r\n    \"preco\": 18.43,\r\n    \"identificacao\": \"teste c2\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1047,6 +1047,82 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Busca Vaga",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"vaga_id\": \"{{vaga_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL_PAREAQUI}}/vaga?menor_preco=12&maior_preco=20.03&tipos_escolhidos={{vaga_tipo_id}},{{vaga_tipo_id_outro}}&tamanhos_escolhidos={{vaga_tamanho_id}},{{vaga_tamanho_id_outro}}&estacionamento=1&sem_acidentes=1&sem_flanelinha=1&order_preco=1&order_preco_asc=0",
+							"host": [
+								"{{APP_URL_PAREAQUI}}"
+							],
+							"path": [
+								"vaga"
+							],
+							"query": [
+								{
+									"key": "menor_preco",
+									"value": "12",
+									"description": "Filtro para o menor preço"
+								},
+								{
+									"key": "maior_preco",
+									"value": "20.03",
+									"description": "Filtro para o maior preço"
+								},
+								{
+									"key": "tipos_escolhidos",
+									"value": "{{vaga_tipo_id}},{{vaga_tipo_id_outro}}",
+									"description": "Lista com os ID's dos Tipos Escolhidos"
+								},
+								{
+									"key": "tamanhos_escolhidos",
+									"value": "{{vaga_tamanho_id}},{{vaga_tamanho_id_outro}}",
+									"description": "Lista com os ID's dos Tamanhos Escolhidos"
+								},
+								{
+									"key": "estacionamento",
+									"value": "1",
+									"description": "Booleano se a vaga é de um Estacionamento ou Não"
+								},
+								{
+									"key": "sem_acidentes",
+									"value": "1",
+									"description": "Booleano se a vaga ou estacionamento tem acidentes registrados"
+								},
+								{
+									"key": "sem_flanelinha",
+									"value": "1",
+									"description": "Booleano se o local da vaga tem algum flanelinha reportado"
+								},
+								{
+									"key": "order_preco",
+									"value": "1",
+									"description": "Booleano se o as vagas são ordenadas pelo preço"
+								},
+								{
+									"key": "order_preco_asc",
+									"value": "0",
+									"description": "Booleano se o as vagas são ordenadas pelo preço de forma crescente"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -1082,7 +1158,7 @@
 		},
 		{
 			"key": "estacionamento_id",
-			"value": "2"
+			"value": "93"
 		},
 		{
 			"key": "vaga_tamanho_id",
@@ -1110,11 +1186,19 @@
 		},
 		{
 			"key": "vaga_id",
-			"value": "6"
+			"value": "35"
 		},
 		{
 			"key": "vaga_agendamento_id",
 			"value": "14"
+		},
+		{
+			"key": "vaga_tamanho_id_outro",
+			"value": "6"
+		},
+		{
+			"key": "vaga_tipo_id_outro",
+			"value": "2"
 		}
 	]
 }
