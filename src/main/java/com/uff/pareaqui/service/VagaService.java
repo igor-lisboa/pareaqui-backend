@@ -1,11 +1,15 @@
 package com.uff.pareaqui.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.uff.pareaqui.entity.Vaga;
 import com.uff.pareaqui.entity.VagaTamanho;
 import com.uff.pareaqui.entity.VagaTipo;
 import com.uff.pareaqui.repository.VagaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,8 +24,15 @@ public class VagaService {
     @Autowired
     private VagaTamanhoService vagaTamanhoService;
 
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
     public Vaga saveVaga(Vaga vaga) {
         return repository.save(vaga);
+    }
+
+    public List<Map<String, Object>> filtraVagas() {
+        return jdbcTemplate.queryForList("SELECT * FROM vagas");
     }
 
     public Vaga getVaga(Long id) {
