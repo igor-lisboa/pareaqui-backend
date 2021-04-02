@@ -1,8 +1,11 @@
 package com.uff.pareaqui.service;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.HashMap;
 
 import com.uff.pareaqui.entity.Vaga;
 import com.uff.pareaqui.entity.VagaTamanho;
@@ -34,9 +37,12 @@ public class VagaService {
         return repository.save(vaga);
     }
 
-    public List<Map<String, Object>> filtraVagas(String menorPreco, String maiorPreco, String tiposEscolhidos,
+    public ArrayList<HashMap<String, Object>> filtraVagas(String menorPreco, String maiorPreco, String tiposEscolhidos,
             String tamanhosEscolhidos, boolean estacionamento, boolean semAcidentes, boolean semFlanelinha,
-            boolean orderPreco, boolean orderPrecoAsc) {
+            boolean orderPreco, boolean orderPrecoAsc) throws SQLException {
+
+        ArrayList<String> bind = new ArrayList<String>();
+
         String baseFrom = "SELECT v.id AS 'vaga_id',v.identificacao AS 'vaga_identificacao',v.preco AS 'vaga_preco',vtipo.id AS 'vaga_tipo_id' ,vtipo.tipo AS 'vaga_tipo',vtipo.img AS 'tipo_img',vtamanho.id AS 'vaga_tamanho_id',vtamanho.tamanho AS 'vaga_tamanho', vagas_todas.estacionamento AS 'estacionamento',vagas_todas.rua AS 'rua',vagas_todas.numero AS 'numero',vagas_todas.cidade AS 'cidade',vagas_todas.complemento AS 'complemento',vagas_todas.bairro AS 'bairro',vagas_todas.estado AS 'estado',vagas_todas.pais AS 'pais' FROM vagas v INNER JOIN ( SELECT e.id AS 'estacionamento',e.rua AS 'rua',e.complemento AS 'complemento',e.cidade AS 'cidade',e.numero AS 'numero',e.bairro AS 'bairro',e.estado AS 'estado',e.pais AS 'pais',ev.vaga_id AS 'vaga_id' FROM estacionamento_vagas ev INNER JOIN estacionamentos e ON (ev.estacionamento_id=e.id) UNION SELECT 0 AS 'estacionamento',rv.rua AS 'rua',rv.complemento AS 'complemento',rv.numero AS 'numero',rv.cidade AS 'cidade',rv.bairro AS 'bairro',rv.estado AS 'estado',rv.pais AS 'pais',rv.vaga_id AS 'vaga_id' FROM rua_vagas rv ) vagas_todas ON (v.id=vagas_todas.vaga_id) INNER JOIN vaga_tipos vtipo ON (v.tipo_id=vtipo.id) INNER JOIN vaga_tamanhos vtamanho ON (v.tamanho_id=vtamanho.id)";
 
         String where = "";
@@ -51,17 +57,19 @@ public class VagaService {
         }
 
         if (menorPreco != null && menorPreco != "null" && maiorPreco != null && maiorPreco != "null") {
-            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_preco BETWEEN " + menorPreco + " AND "
-                    + maiorPreco + ")";
+            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_preco BETWEEN ? AND ?)";
+            bind.add(menorPreco);
+            bind.add(maiorPreco);
         }
 
         if (tiposEscolhidos != null && tiposEscolhidos != "null") {
-            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tipo_id IN (" + tiposEscolhidos + "))";
+            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tipo_id IN (?))";
+            bind.add(tiposEscolhidos);
         }
 
         if (tamanhosEscolhidos != null && tamanhosEscolhidos != "null") {
-            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tamanho_id IN (" + tamanhosEscolhidos
-                    + "))";
+            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tamanho_id IN (?))";
+            bind.add(tamanhosEscolhidos);
         }
 
         if (semFlanelinha) {
@@ -79,7 +87,30 @@ public class VagaService {
 
         String sql = "SELECT * FROM (" + baseFrom + ") consulta_vagas" + where + order;
 
-        return jdbcTemplate.queryForList(sql);
+        // inicia comando
+        PreparedStatement comando = jdbcTemplate.getDataSource().getConnection().prepareStatement(sql);
+        // executa bind
+        Integer contador = 1;
+        for (String valor : bind) {
+            // insere valor no Statement
+            comando.setString(contador, valor);
+            // incrementa contador
+            contador += 1;
+        }
+        ResultSet rs = comando.executeQuery();
+
+        ResultSetMetaData md = rs.getMetaData();
+        int columns = md.getColumnCount();
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+        while (rs.next()) {
+            HashMap<String, Object> row = new HashMap<>(columns);
+            for (int i = 1; i <= columns; ++i) {
+                row.put(md.getColumnName(i), rs.getObject(i));
+            }
+            list.add(row);
+        }
+
+        return list;
     }
 
     public Vaga getVaga(Long id) {
