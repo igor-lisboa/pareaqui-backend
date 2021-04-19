@@ -51,6 +51,7 @@ public class UsuarioService {
         usuarioAtualiza.setNome(usuario.getNome());
         usuarioAtualiza.setSenha(usuario.getSenha());
         usuarioAtualiza.setEmail(usuario.getEmail());
+        usuarioAtualiza.setAdm(usuario.getAdm());
         return this.saveUsuario(usuarioAtualiza);
     }
 }

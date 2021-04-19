@@ -26,9 +26,19 @@ public class Usuario {
     private String nome;
     @Column(nullable = false)
     private String senha;
+    @Column(nullable = false)
+    private Boolean adm;
 
     public Long getId() {
         return id;
+    }
+
+    public Boolean getAdm() {
+        return adm;
+    }
+
+    public void setAdm(Boolean adm) {
+        this.adm = adm;
     }
 
     public String getEmail() {
