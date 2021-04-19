@@ -1,10 +1,12 @@
 package com.uff.pareaqui.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,13 +21,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "vaga_agendamentos")
-public class VagaAgendamento {
+public class VagaAgendamento implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
     private Long id;
     @OneToOne
+    @JoinColumn(nullable = false)
     private Vaga vaga;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
     @Temporal(TemporalType.TIMESTAMP)
     private Date momento;

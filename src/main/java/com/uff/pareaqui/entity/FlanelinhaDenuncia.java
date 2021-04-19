@@ -1,5 +1,7 @@
 package com.uff.pareaqui.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,8 +16,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="flanelinha_denuncias")
-public class FlanelinhaDenuncia {
+@Table(name = "flanelinha_denuncias")
+public class FlanelinhaDenuncia implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
     private Long id;

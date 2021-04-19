@@ -1,9 +1,12 @@
 package com.uff.pareaqui.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,13 +19,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "estacionamentos")
-public class Estacionamento {
+public class Estacionamento implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
     private Long id;
     @Column(nullable = false)
     private String nome;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Usuario dono;
     @Column(nullable = false)
     private String rua;

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
-public class Usuario {
+public class Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
     private Long id;

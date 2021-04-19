@@ -1,8 +1,11 @@
 package com.uff.pareaqui.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -15,11 +18,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "usuario_rua_fiscais")
-public class UsuarioRuaFiscal {
+public class UsuarioRuaFiscal implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue
     private Long id;
     @OneToOne
+    @JoinColumn(nullable = false)
     private Usuario usuario;
 
     public Long getId() {
