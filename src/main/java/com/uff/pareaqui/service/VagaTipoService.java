@@ -13,7 +13,10 @@ public class VagaTipoService {
     @Autowired
     private VagaTipoRepository repository;
 
-    public VagaTipo saveVagaTipo(VagaTipo vagaTipo) {
+    public VagaTipo saveVagaTipo(String img, String tipo) {
+        VagaTipo vagaTipo = new VagaTipo();
+        vagaTipo.setImg(img);
+        vagaTipo.setTipo(tipo);
         return repository.save(vagaTipo);
     }
 

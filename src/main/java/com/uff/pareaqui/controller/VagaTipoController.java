@@ -24,10 +24,11 @@ public class VagaTipoController {
     private VagaTipoService service;
 
     @PostMapping
-    public Map<String, Object> addVagaTipo(@RequestBody VagaTipo vagaTipo) {
+    public Map<String, Object> addVagaTipo(@RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            ret.put("data", service.saveVagaTipo(vagaTipo));
+            ret.put("data", service.saveVagaTipo(String.valueOf((Object) input.get("img")),
+            String.valueOf((Object) input.get("tipo"))));
             ret.put("success", true);
             ret.put("message", "O Tipo de Vaga foi cadastrado com sucesso.");
         } catch (Exception exception) {

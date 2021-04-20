@@ -29,7 +29,7 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private String senha;
     @Column(nullable = false)
-    private Boolean adm;
+    private Boolean adm = false;
 
     public Long getId() {
         return id;

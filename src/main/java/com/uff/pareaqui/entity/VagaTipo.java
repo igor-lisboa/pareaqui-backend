@@ -26,4 +26,28 @@ public class VagaTipo implements Serializable {
     private String tipo;
     @Column(nullable = false)
     private String img;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
 }
