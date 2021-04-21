@@ -28,7 +28,7 @@ public class RuaVagaController {
         try {
             String rua = String.valueOf((Object) input.get("rua"));
             ret.put("data",
-                    service.saveRuaVagaCompleta(rua, Long.parseLong(String.valueOf((Object) input.get("numero"))),
+                    service.saveRuaVagaCompleta(rua, String.valueOf((Object) input.get("numero")),
                             String.valueOf((Object) input.get("complemento")),
                             String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("cidade")),
                             String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais")),
@@ -52,7 +52,7 @@ public class RuaVagaController {
         try {
             String rua = String.valueOf((Object) input.get("rua"));
             ret.put("data",
-                    service.updateRuaVagaCompleta(id, rua, Long.parseLong(String.valueOf((Object) input.get("numero"))),
+                    service.updateRuaVagaCompleta(id, rua, String.valueOf((Object) input.get("numero")),
                             String.valueOf((Object) input.get("complemento")),
                             String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("cidade")),
                             String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais")),

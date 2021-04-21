@@ -30,7 +30,7 @@ public class RuaVaga implements Serializable {
     @Column(nullable = false)
     private String rua;
     @Column(nullable = false)
-    private Long numero;
+    private String numero;
     @Column(nullable = true)
     private String complemento;
     @Column(nullable = false)
@@ -42,7 +42,7 @@ public class RuaVaga implements Serializable {
     @Column(nullable = false)
     private String pais;
 
-    public void setCampos(Vaga vaga, String rua, Long numero, String complemento, String bairro, String cidade,
+    public void setCampos(Vaga vaga, String rua, String numero, String complemento, String bairro, String cidade,
             String estado, String pais) {
         this.setVaga(vaga);
         this.setRua(rua);
@@ -74,7 +74,7 @@ public class RuaVaga implements Serializable {
         this.id = id;
     }
 
-    public void setNumero(Long numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -110,7 +110,7 @@ public class RuaVaga implements Serializable {
         return id;
     }
 
-    public Long getNumero() {
+    public String getNumero() {
         return numero;
     }
 

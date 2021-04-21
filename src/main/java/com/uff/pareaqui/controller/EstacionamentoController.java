@@ -30,8 +30,7 @@ public class EstacionamentoController {
             ret.put("data",
                     service.saveEstacionamentoCompleto(Long.parseLong(String.valueOf((Object) input.get("dono_id"))),
                             String.valueOf((Object) input.get("nome")), String.valueOf((Object) input.get("rua")),
-                            Long.parseLong(String.valueOf((Object) input.get("numero"))),
-                            String.valueOf((Object) input.get("bairro")),
+                            String.valueOf((Object) input.get("numero")), String.valueOf((Object) input.get("bairro")),
                             String.valueOf((Object) input.get("complemento")),
                             String.valueOf((Object) input.get("cidade")), String.valueOf((Object) input.get("estado")),
                             String.valueOf((Object) input.get("pais"))));
@@ -86,10 +85,9 @@ public class EstacionamentoController {
             ret.put("data", service.updateEstacionamentoCompleto(id,
                     Long.parseLong(String.valueOf((Object) input.get("dono_id"))),
                     String.valueOf((Object) input.get("nome")), String.valueOf((Object) input.get("rua")),
-                    Long.parseLong(String.valueOf((Object) input.get("numero"))),
-                    String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("complemento")),
-                    String.valueOf((Object) input.get("cidade")), String.valueOf((Object) input.get("estado")),
-                    String.valueOf((Object) input.get("pais"))));
+                    String.valueOf((Object) input.get("numero")), String.valueOf((Object) input.get("bairro")),
+                    String.valueOf((Object) input.get("complemento")), String.valueOf((Object) input.get("cidade")),
+                    String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais"))));
             ret.put("success", true);
             ret.put("message", "Estacionamento " + id + " atualizado com sucesso.");
         } catch (Exception exception) {

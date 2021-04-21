@@ -31,7 +31,7 @@ public class RuaVagaService {
         return repository.findAll();
     }
 
-    public RuaVaga saveRuaVagaCompleta(String rua, Long numero, String complemento, String bairro, String cidade,
+    public RuaVaga saveRuaVagaCompleta(String rua, String numero, String complemento, String bairro, String cidade,
             String estado, String pais, Long vagaTipoId, Long vagaTamanhoId, Float preco, String identificacao)
             throws Exception {
         Vaga vaga = vagaService.saveVagaCompleta(vagaTipoId, vagaTamanhoId, preco, identificacao);
@@ -42,7 +42,7 @@ public class RuaVagaService {
     }
 
     @Transactional
-    public RuaVaga updateRuaVagaCompleta(Long id, String rua, Long numero, String complemento, String bairro,
+    public RuaVaga updateRuaVagaCompleta(Long id, String rua, String numero, String complemento, String bairro,
             String cidade, String estado, String pais, Long vagaTipoId, Long vagaTamanhoId, Float preco,
             String identificacao) throws Exception {
         RuaVaga ruaVaga = this.getRuaVaga(id);

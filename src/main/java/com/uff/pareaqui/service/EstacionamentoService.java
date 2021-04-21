@@ -21,7 +21,7 @@ public class EstacionamentoService {
         return repository.save(estacionamento);
     }
 
-    public Estacionamento saveEstacionamentoCompleto(Long donoId, String nome, String rua, Long numero, String bairro,
+    public Estacionamento saveEstacionamentoCompleto(Long donoId, String nome, String rua, String numero, String bairro,
             String complemento, String cidade, String estado, String pais) throws Exception {
         Estacionamento estacionamento = new Estacionamento();
 
@@ -56,7 +56,7 @@ public class EstacionamentoService {
         return this.saveEstacionamento(estacionamentoAtualiza);
     }
 
-    public Estacionamento updateEstacionamentoCompleto(Long id, Long donoId, String nome, String rua, Long numero,
+    public Estacionamento updateEstacionamentoCompleto(Long id, Long donoId, String nome, String rua, String numero,
             String bairro, String complemento, String cidade, String estado, String pais) throws Exception {
         Usuario dono = usuarioService.getUsuarioById(donoId);
         if (dono == null) {

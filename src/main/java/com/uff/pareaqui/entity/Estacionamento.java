@@ -32,7 +32,7 @@ public class Estacionamento implements Serializable {
     @Column(nullable = false)
     private String rua;
     @Column(nullable = false)
-    private Long numero;
+    private String numero;
     @Column(nullable = true)
     private String complemento;
     @Column(nullable = false)
@@ -44,7 +44,7 @@ public class Estacionamento implements Serializable {
     @Column(nullable = false)
     private String pais;
 
-    public void setCampos(String nome, Usuario dono, String rua, Long numero, String complemento, String bairro,
+    public void setCampos(String nome, Usuario dono, String rua, String numero, String complemento, String bairro,
             String cidade, String estado, String pais) {
         this.setNome(nome);
         this.setDono(dono);
@@ -77,7 +77,7 @@ public class Estacionamento implements Serializable {
         this.pais = pais;
     }
 
-    public void setNumero(Long numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -125,7 +125,7 @@ public class Estacionamento implements Serializable {
         return estado;
     }
 
-    public Long getNumero() {
+    public String getNumero() {
         return numero;
     }
 
