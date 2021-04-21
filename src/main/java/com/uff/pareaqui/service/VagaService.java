@@ -75,7 +75,7 @@ public class VagaService {
         if (semFlanelinha) {
             where += (where == "" ? " WHERE " : " AND ")
                     + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.rua) NOT LIKE (SELECT CONCAT('%',";
-            String dbName = this.jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName();
+            String dbName = jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName();
             if (dbName == "PostgreSQL") {
                 where += "string_agg(DISTINCT CONCAT(pais,estado,cidade,bairro,rua),',')";
             } else if (dbName == "MySQL") {
