@@ -57,7 +57,8 @@ public class VagaService {
         }
 
         if (menorPreco != null && menorPreco != "null" && maiorPreco != null && maiorPreco != "null") {
-            where += (where == "" ? " WHERE " : " AND ") + "(? <= consulta_vagas.vaga_preco AND consulta_vagas.vaga_preco <= ?)";
+            where += (where == "" ? " WHERE " : " AND ")
+                    + "(? <= consulta_vagas.vaga_preco AND consulta_vagas.vaga_preco <= ?)";
             bind.add(menorPreco);
             bind.add(maiorPreco);
         }
@@ -116,6 +117,9 @@ public class VagaService {
             }
             list.add(row);
         }
+
+        // fechando conexao
+        comando.close();
 
         return list;
     }
