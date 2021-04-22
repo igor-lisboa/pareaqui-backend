@@ -18,7 +18,7 @@ public class HomeController {
         ret.put("success", true);
         ret.put("message", "Olá a documentação está no POSTMAN");
         Map<String, Object> documentacao = new HashMap<String, Object>();
-        documentacao.put("postman", "https://documenter.getpostman.com/view/13081554/TzCMe8PM");
+        documentacao.put("postman", "https://documenter.getpostman.com/view/15046943/TzJvfdJj");
         documentacao.put("github", "https://github.com/igor-lisboa/pareaqui-backend");
         ret.put("data", documentacao);
         return ret;
