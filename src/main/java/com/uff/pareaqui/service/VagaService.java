@@ -41,6 +41,14 @@ public class VagaService {
             String tamanhosEscolhidos, boolean estacionamento, boolean semAcidentes, boolean semFlanelinha,
             boolean orderPreco, boolean orderPrecoAsc) throws SQLException {
 
+        Boolean usaBind = true;
+
+        String dbName = jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName();
+
+        if (dbName == "PostgreSQL") {
+            usaBind = false;
+        }
+
         ArrayList<String> bind = new ArrayList<String>();
 
         String baseFrom = "SELECT v.id AS \"vaga_id\",v.identificacao AS \"vaga_identificacao\",v.preco AS \"vaga_preco\",vtipo.id AS \"vaga_tipo_id\" ,vtipo.tipo AS \"vaga_tipo\",vtipo.img AS \"tipo_img\",vtamanho.id AS \"vaga_tamanho_id\",vtamanho.tamanho AS \"vaga_tamanho\", vagas_todas.estacionamento AS \"estacionamento\",vagas_todas.rua AS \"rua\",vagas_todas.numero AS \"numero\",vagas_todas.cidade AS \"cidade\",vagas_todas.complemento AS \"complemento\",vagas_todas.bairro AS \"bairro\",vagas_todas.estado AS \"estado\",vagas_todas.pais AS \"pais\" FROM vagas v INNER JOIN ( SELECT e.id AS \"estacionamento\",e.rua AS \"rua\",e.complemento AS \"complemento\",e.cidade AS \"cidade\",e.numero AS \"numero\",e.bairro AS \"bairro\",e.estado AS \"estado\",e.pais AS \"pais\",ev.vaga_id AS \"vaga_id\" FROM estacionamento_vagas ev INNER JOIN estacionamentos e ON (ev.estacionamento_id=e.id) UNION SELECT 0 AS \"estacionamento\",rv.rua AS \"rua\",rv.complemento AS \"complemento\",rv.numero AS \"numero\",rv.cidade AS \"cidade\",rv.bairro AS \"bairro\",rv.estado AS \"estado\",rv.pais AS \"pais\",rv.vaga_id AS \"vaga_id\" FROM rua_vagas rv ) vagas_todas ON (v.id=vagas_todas.vaga_id) INNER JOIN vaga_tipos vtipo ON (v.tipo_id=vtipo.id) INNER JOIN vaga_tamanhos vtamanho ON (v.tamanho_id=vtamanho.id)";
@@ -57,26 +65,35 @@ public class VagaService {
         }
 
         if (menorPreco != null && menorPreco != "null" && maiorPreco != null && maiorPreco != "null") {
-            where += (where == "" ? " WHERE " : " AND ")
-                    + "(? <= consulta_vagas.vaga_preco AND consulta_vagas.vaga_preco <= ?)";
-            bind.add(menorPreco);
-            bind.add(maiorPreco);
+            where += (where == "" ? " WHERE " : " AND ") + "(" + (usaBind ? "?" : menorPreco)
+                    + " <= consulta_vagas.vaga_preco AND consulta_vagas.vaga_preco <= " + (usaBind ? "?" : maiorPreco)
+                    + ")";
+
+            if (usaBind) {
+                bind.add(menorPreco);
+                bind.add(maiorPreco);
+            }
         }
 
         if (tiposEscolhidos != null && tiposEscolhidos != "null") {
-            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tipo_id IN (?))";
-            bind.add(tiposEscolhidos);
+            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tipo_id IN ("
+                    + (usaBind ? "?" : tiposEscolhidos) + "))";
+            if (usaBind) {
+                bind.add(tiposEscolhidos);
+            }
         }
 
         if (tamanhosEscolhidos != null && tamanhosEscolhidos != "null") {
-            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tamanho_id IN (?))";
-            bind.add(tamanhosEscolhidos);
+            where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tamanho_id IN ("
+                    + (usaBind ? "?" : tamanhosEscolhidos) + "))";
+            if (usaBind) {
+                bind.add(tamanhosEscolhidos);
+            }
         }
 
         if (semFlanelinha) {
             where += (where == "" ? " WHERE " : " AND ")
                     + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.rua) NOT LIKE (SELECT CONCAT('%',";
-            String dbName = jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName();
             if (dbName == "PostgreSQL") {
                 where += "string_agg(DISTINCT CONCAT(pais,estado,cidade,bairro,rua),',')";
             } else if (dbName == "MySQL") {
