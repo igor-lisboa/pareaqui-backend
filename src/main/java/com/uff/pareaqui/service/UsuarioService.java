@@ -14,7 +14,11 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario saveUsuario(Usuario usuario) {
+    public Usuario saveUsuario(Usuario usuario) throws Exception {
+        Collection<Usuario> usuarios = repository.findByEmail(usuario.getEmail());
+        if (usuarios.size() > 0) {
+            throw new Exception("Esse e-mail já está em uso por outro usuário, tente a opção 'Esqueci minha senha'");
+        }
         return repository.save(usuario);
     }
 
