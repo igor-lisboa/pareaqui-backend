@@ -1,11 +1,9 @@
 package com.uff.pareaqui.service;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.uff.pareaqui.entity.Vaga;
 import com.uff.pareaqui.entity.VagaTamanho;
@@ -37,7 +35,7 @@ public class VagaService {
         return repository.save(vaga);
     }
 
-    public ArrayList<HashMap<String, Object>> filtraVagas(String menorPreco, String maiorPreco, String tiposEscolhidos,
+    public List<Map<String, Object>> filtraVagas(String menorPreco, String maiorPreco, String tiposEscolhidos,
             String tamanhosEscolhidos, boolean estacionamento, boolean semAcidentes, boolean semFlanelinha,
             boolean orderPreco, boolean orderPrecoAsc) throws SQLException {
 
@@ -45,9 +43,9 @@ public class VagaService {
 
         String dbName = jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName();
 
-        if (dbName == "PostgreSQL") {
-            usaBind = false;
-        }
+        // if (dbName == "PostgreSQL") {
+        usaBind = false;
+        // }
 
         ArrayList<String> bind = new ArrayList<String>();
 
@@ -92,14 +90,13 @@ public class VagaService {
         }
 
         if (semFlanelinha) {
-            where += (where == "" ? " WHERE " : " AND ")
-                    + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.rua) NOT LIKE (SELECT CONCAT('%',";
-            if (dbName == "PostgreSQL") {
-                where += "string_agg(DISTINCT CONCAT(pais,estado,cidade,bairro,rua),',')";
-            } else if (dbName == "MySQL") {
+            if (dbName != "PostgreSQL") {
+                where += (where == "" ? " WHERE " : " AND ")
+                        + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.rua) NOT LIKE (SELECT CONCAT('%',";
                 where += "GROUP_CONCAT(DISTINCT CONCAT(pais,estado,cidade,bairro,rua))";
+                where += ",'%') FROM flanelinha_denuncias))";
             }
-            where += ",'%') FROM flanelinha_denuncias))";
+
         }
 
         String order = "";
@@ -112,33 +109,7 @@ public class VagaService {
 
         String sql = "SELECT * FROM (" + baseFrom + ") consulta_vagas" + where + order;
 
-        // inicia comando
-        PreparedStatement comando = jdbcTemplate.getDataSource().getConnection().prepareStatement(sql);
-        // executa bind
-        Integer contador = 1;
-        for (String valor : bind) {
-            // insere valor no Statement
-            comando.setString(contador, valor);
-            // incrementa contador
-            contador += 1;
-        }
-        ResultSet rs = comando.executeQuery();
-
-        ResultSetMetaData md = rs.getMetaData();
-        int columns = md.getColumnCount();
-        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
-        while (rs.next()) {
-            HashMap<String, Object> row = new HashMap<>(columns);
-            for (int i = 1; i <= columns; ++i) {
-                row.put(md.getColumnName(i), rs.getObject(i));
-            }
-            list.add(row);
-        }
-
-        // fechando conexao
-        comando.close();
-
-        return list;
+        return jdbcTemplate.queryForList(sql);
     }
 
     public Vaga getVaga(Long id) {
