@@ -71,7 +71,7 @@ public class UsuarioController {
     public Map<String, Object> addUsuario(@RequestBody Usuario usuario) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            usuario = service.saveUsuario(usuario);
+            usuario = service.saveUsuario(usuario, true);
 
             ret.put("success", true);
             ret.put("message", "O usuário " + usuario.getNome() + " foi cadastrado com sucesso.");
