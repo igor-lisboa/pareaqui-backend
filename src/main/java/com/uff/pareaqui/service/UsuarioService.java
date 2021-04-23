@@ -50,7 +50,7 @@ public class UsuarioService {
         repository.deleteById(id);
     }
 
-    public Usuario updateUsuario(Long id, Usuario usuario) {
+    public Usuario updateUsuario(Long id, Usuario usuario) throws Exception {
         Usuario usuarioAtualiza = repository.getOne(id);
         usuarioAtualiza.setNome(usuario.getNome());
         usuarioAtualiza.setSenha(usuario.getSenha());
