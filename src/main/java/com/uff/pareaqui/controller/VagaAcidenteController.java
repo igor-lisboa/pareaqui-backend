@@ -23,10 +23,16 @@ public class VagaAcidenteController {
     public Map<String, Object> addEstacionamentoVaga(@RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            ret.put("data",
-                    service.saveVagaAcidenteCompleta(Long.parseLong(String.valueOf((Object) input.get("vaga_id"))),
-                            String.valueOf((Object) input.get("descricao")),
-                            String.valueOf((Object) input.get("momento"))));
+            String descricao = String.valueOf((Object) input.get("descricao"));
+            if (descricao == "null") {
+                descricao = null;
+            }
+            String momento = String.valueOf((Object) input.get("momento"));
+            if (momento == "null") {
+                momento = null;
+            }
+            ret.put("data", service.saveVagaAcidenteCompleta(
+                    Long.parseLong(String.valueOf((Object) input.get("vaga_id"))), descricao, momento));
             ret.put("success", true);
             ret.put("message", "O acidente foi cadastrado.");
         } catch (Exception exception) {

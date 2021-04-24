@@ -29,15 +29,42 @@ public class RuaVagaController {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
             String rua = String.valueOf((Object) input.get("rua"));
-            ret.put("data",
-                    service.saveRuaVagaCompleta(rua, String.valueOf((Object) input.get("numero")),
-                            String.valueOf((Object) input.get("complemento")),
-                            String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("cidade")),
-                            String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais")),
-                            Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id"))),
-                            Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id"))),
-                            Float.parseFloat(String.valueOf((Object) input.get("preco"))),
-                            String.valueOf((Object) input.get("identificacao"))));
+            if (rua == "null") {
+                rua = null;
+            }
+            String numero = String.valueOf((Object) input.get("numero"));
+            if (numero == "null") {
+                numero = null;
+            }
+            String complemento = String.valueOf((Object) input.get("complemento"));
+            if (complemento == "null") {
+                complemento = null;
+            }
+            String bairro = String.valueOf((Object) input.get("bairro"));
+            if (bairro == "null") {
+                bairro = null;
+            }
+            String cidade = String.valueOf((Object) input.get("cidade"));
+            if (cidade == "null") {
+                cidade = null;
+            }
+            String estado = String.valueOf((Object) input.get("estado"));
+            if (estado == "null") {
+                estado = null;
+            }
+            String pais = String.valueOf((Object) input.get("pais"));
+            if (pais == "null") {
+                pais = null;
+            }
+            Long vagaTipoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id")));
+            Long vagaTamanhoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id")));
+            Float preco = Float.parseFloat(String.valueOf((Object) input.get("preco")));
+            String identificacao = String.valueOf((Object) input.get("identificacao"));
+            if (identificacao == "null") {
+                identificacao = null;
+            }
+            ret.put("data", service.saveRuaVagaCompleta(rua, numero, complemento, bairro, cidade, estado, pais,
+                    vagaTipoId, vagaTamanhoId, preco, identificacao));
             ret.put("message", "A vaga da rua " + rua + " foi adicionada.");
             ret.put("success", true);
         } catch (Exception exception) {
@@ -53,15 +80,42 @@ public class RuaVagaController {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
             String rua = String.valueOf((Object) input.get("rua"));
-            ret.put("data",
-                    service.updateRuaVagaCompleta(id, rua, String.valueOf((Object) input.get("numero")),
-                            String.valueOf((Object) input.get("complemento")),
-                            String.valueOf((Object) input.get("bairro")), String.valueOf((Object) input.get("cidade")),
-                            String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais")),
-                            Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id"))),
-                            Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id"))),
-                            Float.parseFloat(String.valueOf((Object) input.get("preco"))),
-                            String.valueOf((Object) input.get("identificacao"))));
+            if (rua == "null") {
+                rua = null;
+            }
+            String numero = String.valueOf((Object) input.get("numero"));
+            if (numero == "null") {
+                numero = null;
+            }
+            String complemento = String.valueOf((Object) input.get("complemento"));
+            if (complemento == "null") {
+                complemento = null;
+            }
+            String bairro = String.valueOf((Object) input.get("bairro"));
+            if (bairro == "null") {
+                bairro = null;
+            }
+            String cidade = String.valueOf((Object) input.get("cidade"));
+            if (cidade == "null") {
+                cidade = null;
+            }
+            String estado = String.valueOf((Object) input.get("estado"));
+            if (estado == "null") {
+                estado = null;
+            }
+            String pais = String.valueOf((Object) input.get("pais"));
+            if (pais == "null") {
+                pais = null;
+            }
+            Long vagaTipoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tipo_id")));
+            Long vagaTamanhoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id")));
+            Float preco = Float.parseFloat(String.valueOf((Object) input.get("preco")));
+            String identificacao = String.valueOf((Object) input.get("identificacao"));
+            if (identificacao == "null") {
+                identificacao = null;
+            }
+            ret.put("data", service.updateRuaVagaCompleta(id, rua, numero, complemento, bairro, cidade, estado, pais,
+                    vagaTipoId, vagaTamanhoId, preco, identificacao));
             ret.put("message", "Vaga da rua " + rua + " recuperada com sucesso.");
             ret.put("success", true);
         } catch (Exception exception) {

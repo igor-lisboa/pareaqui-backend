@@ -34,7 +34,9 @@ public class EstacionamentoVagaController {
             Long vagaTamanhoId = Long.parseLong(String.valueOf((Object) input.get("vaga_tamanho_id")));
             Float preco = Float.parseFloat(String.valueOf((Object) input.get("preco")));
             String identificacao = String.valueOf((Object) input.get("identificacao"));
-
+            if (identificacao == "null") {
+                identificacao = null;
+            }
             EstacionamentoVaga estacionamentoVaga = service.saveEstacionamentoVagaCompleta(estacionamentoId, vagaTipoId,
                     vagaTamanhoId, preco, identificacao);
 
