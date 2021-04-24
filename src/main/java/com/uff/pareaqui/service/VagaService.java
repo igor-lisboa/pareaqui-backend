@@ -86,13 +86,14 @@ public class VagaService {
         }
 
         if (semFlanelinha) {
-            if (dbName != "PostgreSQL") {
-                where += (where == "" ? " WHERE " : " AND ")
-                        + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.rua) NOT LIKE (SELECT CONCAT('%',";
+            where += (where == "" ? " WHERE " : " AND ")
+                    + "(CONCAT(consulta_vagas.pais,consulta_vagas.estado,consulta_vagas.cidade,consulta_vagas.bairro,consulta_vagas.rua) NOT LIKE (SELECT CONCAT('%',";
+            if (dbName == "PostgreSQL") {
+                where += "string_agg(DISTINCT CONCAT(pais,estado,cidade,bairro,rua),',')";
+            } else if (dbName == "MySQL") {
                 where += "GROUP_CONCAT(DISTINCT CONCAT(pais,estado,cidade,bairro,rua))";
-                where += ",'%') FROM flanelinha_denuncias))";
             }
-
+            where += ",'%') FROM flanelinha_denuncias))";
         }
 
         String order = "";
