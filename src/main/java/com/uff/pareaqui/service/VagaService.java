@@ -97,7 +97,7 @@ public class VagaService {
             } else if (dbName == "MySQL") {
                 where += "GROUP_CONCAT(DISTINCT CONCAT(pais,estado,cidade,bairro,rua))";
             }
-            where += ",'%') FROM flanelinha_denuncias))";
+            where += ",'-','%') FROM flanelinha_denuncias))";
         }
 
         String order = "";
