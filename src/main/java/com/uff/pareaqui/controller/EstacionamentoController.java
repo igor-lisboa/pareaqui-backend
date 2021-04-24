@@ -29,13 +29,41 @@ public class EstacionamentoController {
     public Map<String, Object> addEstacionamento(@RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            ret.put("data",
-                    service.saveEstacionamentoCompleto(Long.parseLong(String.valueOf((Object) input.get("dono_id"))),
-                            String.valueOf((Object) input.get("nome")), String.valueOf((Object) input.get("rua")),
-                            String.valueOf((Object) input.get("numero")), String.valueOf((Object) input.get("bairro")),
-                            String.valueOf((Object) input.get("complemento")),
-                            String.valueOf((Object) input.get("cidade")), String.valueOf((Object) input.get("estado")),
-                            String.valueOf((Object) input.get("pais"))));
+            Long donoId = Long.parseLong(String.valueOf((Object) input.get("dono_id")));
+            String nome = String.valueOf((Object) input.get("nome"));
+            if (nome == "null") {
+                nome = null;
+            }
+            String rua = String.valueOf((Object) input.get("rua"));
+            if (rua == "null") {
+                rua = null;
+            }
+            String numero = String.valueOf((Object) input.get("numero"));
+            if (numero == "null") {
+                numero = null;
+            }
+            String bairro = String.valueOf((Object) input.get("bairro"));
+            if (bairro == "null") {
+                bairro = null;
+            }
+            String complemento = String.valueOf((Object) input.get("complemento"));
+            if (complemento == "null") {
+                complemento = null;
+            }
+            String cidade = String.valueOf((Object) input.get("cidade"));
+            if (cidade == "null") {
+                cidade = null;
+            }
+            String estado = String.valueOf((Object) input.get("estado"));
+            if (estado == "null") {
+                estado = null;
+            }
+            String pais = String.valueOf((Object) input.get("pais"));
+            if (pais == "null") {
+                pais = null;
+            }
+            ret.put("data", service.saveEstacionamentoCompleto(donoId, nome, rua, numero, bairro, complemento, cidade,
+                    estado, pais));
             ret.put("success", true);
             ret.put("message", "O estacionamento foi cadastrado com sucesso.");
         } catch (Exception exception) {
@@ -84,12 +112,41 @@ public class EstacionamentoController {
     public Map<String, Object> updateEstacionamento(@PathVariable Long id, @RequestBody Map<String, ?> input) {
         Map<String, Object> ret = new HashMap<String, Object>();
         try {
-            ret.put("data", service.updateEstacionamentoCompleto(id,
-                    Long.parseLong(String.valueOf((Object) input.get("dono_id"))),
-                    String.valueOf((Object) input.get("nome")), String.valueOf((Object) input.get("rua")),
-                    String.valueOf((Object) input.get("numero")), String.valueOf((Object) input.get("bairro")),
-                    String.valueOf((Object) input.get("complemento")), String.valueOf((Object) input.get("cidade")),
-                    String.valueOf((Object) input.get("estado")), String.valueOf((Object) input.get("pais"))));
+            Long donoId = Long.parseLong(String.valueOf((Object) input.get("dono_id")));
+            String nome = String.valueOf((Object) input.get("nome"));
+            if (nome == "null") {
+                nome = null;
+            }
+            String rua = String.valueOf((Object) input.get("rua"));
+            if (rua == "null") {
+                rua = null;
+            }
+            String numero = String.valueOf((Object) input.get("numero"));
+            if (numero == "null") {
+                numero = null;
+            }
+            String bairro = String.valueOf((Object) input.get("bairro"));
+            if (bairro == "null") {
+                bairro = null;
+            }
+            String complemento = String.valueOf((Object) input.get("complemento"));
+            if (complemento == "null") {
+                complemento = null;
+            }
+            String cidade = String.valueOf((Object) input.get("cidade"));
+            if (cidade == "null") {
+                cidade = null;
+            }
+            String estado = String.valueOf((Object) input.get("estado"));
+            if (estado == "null") {
+                estado = null;
+            }
+            String pais = String.valueOf((Object) input.get("pais"));
+            if (pais == "null") {
+                pais = null;
+            }
+            ret.put("data", service.updateEstacionamentoCompleto(id, donoId, nome, rua, numero, bairro, complemento,
+                    cidade, estado, pais));
             ret.put("success", true);
             ret.put("message", "Estacionamento " + id + " atualizado com sucesso.");
         } catch (Exception exception) {
