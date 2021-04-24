@@ -43,6 +43,10 @@ public class VagaService {
 
         String dbName = jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName();
 
+        if (dbName == "PostgreSQL") {
+            usaBind = false;
+        }
+
         ArrayList<Object> bind = new ArrayList<Object>();
 
         String baseFrom = "SELECT v.id AS \"vaga_id\",v.identificacao AS \"vaga_identificacao\",v.preco AS \"vaga_preco\",vtipo.id AS \"vaga_tipo_id\" ,vtipo.tipo AS \"vaga_tipo\",vtipo.img AS \"tipo_img\",vtamanho.id AS \"vaga_tamanho_id\",vtamanho.tamanho AS \"vaga_tamanho\", vagas_todas.estacionamento AS \"estacionamento\",vagas_todas.rua AS \"rua\",vagas_todas.numero AS \"numero\",vagas_todas.cidade AS \"cidade\",vagas_todas.complemento AS \"complemento\",vagas_todas.bairro AS \"bairro\",vagas_todas.estado AS \"estado\",vagas_todas.pais AS \"pais\" FROM vagas v INNER JOIN ( SELECT e.id AS \"estacionamento\",e.rua AS \"rua\",e.complemento AS \"complemento\",e.cidade AS \"cidade\",e.numero AS \"numero\",e.bairro AS \"bairro\",e.estado AS \"estado\",e.pais AS \"pais\",ev.vaga_id AS \"vaga_id\" FROM estacionamento_vagas ev INNER JOIN estacionamentos e ON (ev.estacionamento_id=e.id) UNION SELECT 0 AS \"estacionamento\",rv.rua AS \"rua\",rv.complemento AS \"complemento\",rv.numero AS \"numero\",rv.cidade AS \"cidade\",rv.bairro AS \"bairro\",rv.estado AS \"estado\",rv.pais AS \"pais\",rv.vaga_id AS \"vaga_id\" FROM rua_vagas rv ) vagas_todas ON (v.id=vagas_todas.vaga_id) INNER JOIN vaga_tipos vtipo ON (v.tipo_id=vtipo.id) INNER JOIN vaga_tamanhos vtamanho ON (v.tamanho_id=vtamanho.id)";
