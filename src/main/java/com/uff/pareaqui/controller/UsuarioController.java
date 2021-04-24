@@ -19,7 +19,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 @RestController
+@Transactional
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/usuario")
 public class UsuarioController {
