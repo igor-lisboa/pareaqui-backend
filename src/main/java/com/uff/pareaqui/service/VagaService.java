@@ -58,7 +58,7 @@ public class VagaService {
                     + "(consulta_vagas.vaga_id NOT IN (SELECT DISTINCT vaga_id FROM vaga_acidentes) AND consulta_vagas.estacionamento NOT IN (SELECT DISTINCT estacionamento_vagas.estacionamento_id FROM vaga_acidentes INNER JOIN vagas ON (vaga_acidentes.vaga_id=vagas.id) INNER JOIN estacionamento_vagas ON (estacionamento_vagas.vaga_id=vagas.id)) )";
         }
 
-        if (menorPreco != null && menorPreco != "null" && maiorPreco != null && maiorPreco != "null") {
+        if (menorPreco != null && maiorPreco != null) {
             where += (where == "" ? " WHERE " : " AND ") + "(" + (usaBind ? "?" : menorPreco)
                     + " <= consulta_vagas.vaga_preco AND consulta_vagas.vaga_preco <= " + (usaBind ? "?" : maiorPreco)
                     + ")";
@@ -69,7 +69,7 @@ public class VagaService {
             }
         }
 
-        if (tiposEscolhidos != null && tiposEscolhidos != "null") {
+        if (tiposEscolhidos != null) {
             where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tipo_id IN ("
                     + (usaBind ? "?" : tiposEscolhidos) + "))";
             if (usaBind) {
@@ -77,7 +77,7 @@ public class VagaService {
             }
         }
 
-        if (tamanhosEscolhidos != null && tamanhosEscolhidos != "null") {
+        if (tamanhosEscolhidos != null) {
             where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tamanho_id IN ("
                     + (usaBind ? "?" : tamanhosEscolhidos) + "))";
             if (usaBind) {
