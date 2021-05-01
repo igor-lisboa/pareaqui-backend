@@ -39,10 +39,7 @@ public class VagaService {
 
         Boolean usaBind = true;
 
-        String dataSourceUrl = env.getProperty("spring.datasource.url");
-        String dataSourceUsername = env.getProperty("spring.datasource.username");
-        String dataSourcePassword = env.getProperty("spring.datasource.password");
-        DataAccessObject dao = new DataAccessObject(dataSourceUrl, dataSourceUsername, dataSourcePassword);
+        DataAccessObject dao = this.getDao();
 
         String dbName = dao.pegaDbNome();
 
@@ -110,6 +107,17 @@ public class VagaService {
         String sql = "SELECT * FROM (" + baseFrom + ") consulta_vagas" + where + order;
 
         return dao.dbCarrega(sql, bind.toArray());
+    }
+
+    public Object getMaiorPrecoVagas() throws SQLException {
+        return this.getDao().dbValor("MAX(preco)", "vagas", "", null);
+    }
+
+    public DataAccessObject getDao() throws SQLException {
+        String dataSourceUrl = env.getProperty("spring.datasource.url");
+        String dataSourceUsername = env.getProperty("spring.datasource.username");
+        String dataSourcePassword = env.getProperty("spring.datasource.password");
+        return new DataAccessObject(dataSourceUrl, dataSourceUsername, dataSourcePassword);
     }
 
     public Vaga getVaga(Long id) {
