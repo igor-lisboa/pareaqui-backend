@@ -1,9 +1,15 @@
 package com.uff.pareaqui.service;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.HashMap;
+
+import javax.transaction.Transactional;
 
 import com.uff.pareaqui.entity.Vaga;
 import com.uff.pareaqui.entity.VagaTamanho;
@@ -11,12 +17,11 @@ import com.uff.pareaqui.entity.VagaTipo;
 import com.uff.pareaqui.repository.VagaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 
 @Service
-@RestController
 public class VagaService {
 
     @Autowired
@@ -31,23 +36,27 @@ public class VagaService {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private Environment env;
+
     public Vaga saveVaga(Vaga vaga) {
         return repository.save(vaga);
     }
 
-    public List<Map<String, Object>> filtraVagas(String menorPreco, String maiorPreco, String tiposEscolhidos,
+    public ArrayList<HashMap<String, Object>> filtraVagas(String menorPreco, String maiorPreco, String tiposEscolhidos,
             String tamanhosEscolhidos, boolean estacionamento, boolean semAcidentes, boolean semFlanelinha,
             boolean orderPreco, boolean orderPrecoAsc) throws SQLException {
 
         Boolean usaBind = true;
 
-        String dbName = jdbcTemplate.getDataSource().getConnection().getMetaData().getDatabaseProductName();
+        String dataSourceUrl = env.getProperty("spring.datasource.url");
+        String dataSourceUsername = env.getProperty("spring.datasource.username");
+        String dataSourcePassword = env.getProperty("spring.datasource.password");
+        Connection conn = DriverManager.getConnection(dataSourceUrl, dataSourceUsername, dataSourcePassword);
 
-        if (dbName == "PostgreSQL") {
-            usaBind = false;
-        }
+        String dbName = conn.getMetaData().getDatabaseProductName();
 
-        ArrayList<Object> bind = new ArrayList<Object>();
+        ArrayList<String> bind = new ArrayList<String>();
 
         String baseFrom = "SELECT v.id AS \"vaga_id\",v.identificacao AS \"vaga_identificacao\",v.preco AS \"vaga_preco\",vtipo.id AS \"vaga_tipo_id\" ,vtipo.tipo AS \"vaga_tipo\",vtipo.img AS \"tipo_img\",vtamanho.id AS \"vaga_tamanho_id\",vtamanho.tamanho AS \"vaga_tamanho\", vagas_todas.estacionamento AS \"estacionamento\",vagas_todas.rua AS \"rua\",vagas_todas.numero AS \"numero\",vagas_todas.cidade AS \"cidade\",vagas_todas.complemento AS \"complemento\",vagas_todas.bairro AS \"bairro\",vagas_todas.estado AS \"estado\",vagas_todas.pais AS \"pais\" FROM vagas v INNER JOIN ( SELECT e.id AS \"estacionamento\",e.rua AS \"rua\",e.complemento AS \"complemento\",e.cidade AS \"cidade\",e.numero AS \"numero\",e.bairro AS \"bairro\",e.estado AS \"estado\",e.pais AS \"pais\",ev.vaga_id AS \"vaga_id\" FROM estacionamento_vagas ev INNER JOIN estacionamentos e ON (ev.estacionamento_id=e.id) UNION SELECT 0 AS \"estacionamento\",rv.rua AS \"rua\",rv.complemento AS \"complemento\",rv.cidade AS \"cidade\",rv.numero AS \"numero\",rv.bairro AS \"bairro\",rv.estado AS \"estado\",rv.pais AS \"pais\",rv.vaga_id AS \"vaga_id\" FROM rua_vagas rv ) vagas_todas ON (v.id=vagas_todas.vaga_id) INNER JOIN vaga_tipos vtipo ON (v.tipo_id=vtipo.id) INNER JOIN vaga_tamanhos vtamanho ON (v.tamanho_id=vtamanho.id)";
 
@@ -68,8 +77,8 @@ public class VagaService {
                     + ")";
 
             if (usaBind) {
-                bind.add((Object) menorPreco);
-                bind.add((Object) maiorPreco);
+                bind.add(menorPreco);
+                bind.add(maiorPreco);
             }
         }
 
@@ -77,7 +86,7 @@ public class VagaService {
             where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tipo_id IN ("
                     + (usaBind ? "?" : tiposEscolhidos) + "))";
             if (usaBind) {
-                bind.add((Object) tiposEscolhidos);
+                bind.add(tiposEscolhidos);
             }
         }
 
@@ -85,7 +94,7 @@ public class VagaService {
             where += (where == "" ? " WHERE " : " AND ") + "(consulta_vagas.vaga_tamanho_id IN ("
                     + (usaBind ? "?" : tamanhosEscolhidos) + "))";
             if (usaBind) {
-                bind.add((Object) tamanhosEscolhidos);
+                bind.add(tamanhosEscolhidos);
             }
         }
 
@@ -110,12 +119,34 @@ public class VagaService {
 
         String sql = "SELECT * FROM (" + baseFrom + ") consulta_vagas" + where + order;
 
-        List<Map<String, Object>> vagas = jdbcTemplate.queryForList(sql, bind.toArray());
+        // inicia comando
+        PreparedStatement comando = conn.prepareStatement(sql);
+        // executa bind
+        Integer contador = 1;
+        for (String valor : bind) {
+            // insere valor no Statement
+            comando.setString(contador, valor);
+            // incrementa contador
+            contador += 1;
+        }
+        ResultSet rs = comando.executeQuery();
 
-        // forçando fechar conexao apos o uso
-        jdbcTemplate.getDataSource().getConnection().close();
+        ResultSetMetaData md = rs.getMetaData();
+        int columns = md.getColumnCount();
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+        while (rs.next()) {
+            HashMap<String, Object> row = new HashMap<>(columns);
+            for (int i = 1; i <= columns; ++i) {
+                row.put(md.getColumnName(i), rs.getObject(i));
+            }
+            list.add(row);
+        }
 
-        return vagas;
+        if (!conn.isClosed()) {
+            conn.close();
+        }
+
+        return list;
     }
 
     public Vaga getVaga(Long id) {
