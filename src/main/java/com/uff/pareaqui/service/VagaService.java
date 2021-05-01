@@ -1,16 +1,10 @@
 package com.uff.pareaqui.service;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.transaction.Transactional;
-
+import com.uff.pareaqui.data.DataAccessObject;
 import com.uff.pareaqui.entity.Vaga;
 import com.uff.pareaqui.entity.VagaTamanho;
 import com.uff.pareaqui.entity.VagaTipo;
@@ -18,7 +12,6 @@ import com.uff.pareaqui.repository.VagaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,9 +25,6 @@ public class VagaService {
 
     @Autowired
     private VagaTamanhoService vagaTamanhoService;
-
-    @Autowired
-    JdbcTemplate jdbcTemplate;
 
     @Autowired
     private Environment env;
@@ -52,9 +42,9 @@ public class VagaService {
         String dataSourceUrl = env.getProperty("spring.datasource.url");
         String dataSourceUsername = env.getProperty("spring.datasource.username");
         String dataSourcePassword = env.getProperty("spring.datasource.password");
-        Connection conn = DriverManager.getConnection(dataSourceUrl, dataSourceUsername, dataSourcePassword);
+        DataAccessObject dao = new DataAccessObject(dataSourceUrl, dataSourceUsername, dataSourcePassword);
 
-        String dbName = conn.getMetaData().getDatabaseProductName();
+        String dbName = dao.pegaDbNome();
 
         ArrayList<String> bind = new ArrayList<String>();
 
@@ -119,34 +109,7 @@ public class VagaService {
 
         String sql = "SELECT * FROM (" + baseFrom + ") consulta_vagas" + where + order;
 
-        // inicia comando
-        PreparedStatement comando = conn.prepareStatement(sql);
-        // executa bind
-        Integer contador = 1;
-        for (String valor : bind) {
-            // insere valor no Statement
-            comando.setString(contador, valor);
-            // incrementa contador
-            contador += 1;
-        }
-        ResultSet rs = comando.executeQuery();
-
-        ResultSetMetaData md = rs.getMetaData();
-        int columns = md.getColumnCount();
-        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
-        while (rs.next()) {
-            HashMap<String, Object> row = new HashMap<>(columns);
-            for (int i = 1; i <= columns; ++i) {
-                row.put(md.getColumnName(i), rs.getObject(i));
-            }
-            list.add(row);
-        }
-
-        if (!conn.isClosed()) {
-            conn.close();
-        }
-
-        return list;
+        return dao.dbCarrega(sql, bind.toArray());
     }
 
     public Vaga getVaga(Long id) {
