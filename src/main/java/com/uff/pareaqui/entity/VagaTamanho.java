@@ -24,4 +24,20 @@ public class VagaTamanho implements Serializable {
     private Long id;
     @Column(nullable = false)
     private String tamanho;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTamanho() {
+        return tamanho;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTamanho(String tamanho) {
+        this.tamanho = tamanho;
+    }
 }
