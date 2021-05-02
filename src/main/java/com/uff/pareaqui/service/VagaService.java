@@ -37,7 +37,7 @@ public class VagaService {
             String tamanhosEscolhidos, boolean estacionamento, boolean semAcidentes, boolean semFlanelinha,
             boolean orderPreco, boolean orderPrecoAsc) throws SQLException {
 
-        Boolean usaBind = true;
+        Boolean usaBind = false;
 
         DataAccessObject dao = this.getDao();
 
